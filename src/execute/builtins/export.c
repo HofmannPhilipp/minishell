@@ -6,20 +6,20 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 10:40:51 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/04 10:21:06 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:35:28 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	replace_env_entry(char **envp[],char *key, char *entry)
+void	replace_env_entry(char ***envp, char *key, char *entry)
 {
 	int	i;
 
 	i = 0;
 	while((*envp)[i] != NULL)
 	{
-		if (ft_strncmp((*envp)[i], key, ft_strlen((*envp)[i]) == 0))
+		if (ft_strncmp((*envp)[i], key, ft_strlen(key)) == 0)
 		{
 			free((*envp)[i]);
 			(*envp)[i] = entry;
@@ -29,17 +29,19 @@ void	replace_env_entry(char **envp[],char *key, char *entry)
 	}
 }
 
-void	add_env_var(char ***envp, char *key, char *value)
+void	add_env_var(char ***envp, char *entry)
 {
-	char	*entry;
-	char	*temp;
 	char	**new_envp;
+	char	*value;
 	int		i;
-
-	temp = ft_strjoin(key, "=");
-	entry = ft_strjoin(temp, value);
-	free(temp);
-	if (getenv(key) != NULL) //getenv geht nicht weil env von uns geaendert wird
+	char	*key;
+	
+	key = ft_strdup(entry);
+	entry = ft_strdup(entry);
+	value = ft_strchr(key, '=');
+	if (value)
+		*value = '\0';
+	if (get_envp(key, *envp) != NULL)
 	{
 		replace_env_entry(envp, key, entry);
 		return ;

@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:10:07 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/04 13:17:17 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:35:31 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,6 @@ static void	skip_whitespace(char **prompt)
 			(*prompt) ++;
 }
 
-// static char	*parse_dqoutes(char **prompt)
-// {
-// 	int		token_len;
-// 	char	*result;
-
-// 	token_len = 0;
-// 	(*prompt)++;
-// 	while (**prompt != '\0' && **prompt != '"')
-// 	{
-// 		token_len++;
-// 		(*prompt)++;
-// 	}
-// 	result = ft_substr(*prompt - token_len, 0, token_len);
-// 	if (**prompt != '"')
-// 		result = open_quote_prompt(result, '"');
-// 	result = expand_variables_in_string(result);
-// 	(*prompt)++;
-// 	return (result);
-// }
-
 static	char	*parse_qoutes(char **prompt, char quote_type)
 {
 	int		token_len;
@@ -73,7 +53,7 @@ static	char	*parse_qoutes(char **prompt, char quote_type)
 	if (**prompt != quote_type)
 		result = open_quote_prompt(result, quote_type);
 	if (quote_type == '"')
-		result = expand_variables_tr(result);
+		result = expand_str(result);
 	(*prompt)++;
 	return (result);
 }
