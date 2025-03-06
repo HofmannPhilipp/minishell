@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:10:07 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/04 15:35:31 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:54:51 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ static	char	*parse_qoutes(char **prompt, char quote_type)
 		token_len++;
 		(*prompt)++;
 	}
+	if (token_len == 0)
+	{
+		(*prompt)++;
+		return (ft_strdup(""));
+	}
+	c = **prompt;
+	str = *prompt;
 	result = ft_substr(*prompt - token_len, 0, token_len);
 	if (**prompt != quote_type)
 		result = open_quote_prompt(result, quote_type);
@@ -62,25 +69,42 @@ static t_list *parse_text(char **prompt)
 	int		token_len;
 	char	quote_type;
 	char	*result;
-
+	char	*str;
+	char	*temp;
+	char	*quote;
 	token_len = 0;
 	quote_type = 0;
 
 	char c;
+	quote = ft_strdup("");
 	while (**prompt != '\0')
 	{
 		c = **prompt;
-		if ((**prompt == '"' || **prompt == '\'') && token_len == 0)
+		str = *prompt;
+		if((**prompt == '"' || **prompt == '\''))
 		{
-			result = parse_qoutes(prompt, **prompt);
-			return (ft_lstnew(token_init(TEXT, result)));
+			if (token_len > 0)
+			{
+				result = ft_substr(*prompt - token_len, 0, token_len);
+				quote = ft_strjoin(quote, result);
+			}
+			temp = parse_qoutes(prompt, **prompt);
+			str = *prompt;
+			c = **prompt;
+			quote = ft_strjoin(quote, temp);
+			token_len = 0;
+			continue;
 		}
-		if ((ft_strchr("\t\n\v\f\r '\"", **prompt) || is_symbol(*prompt, 0) != 'a'))
+		if ((ft_strchr("\t\n\v\f\r ", **prompt) || is_symbol(*prompt, 0) != 'a'))
 			break;
 		(*prompt)++;
 		token_len++;
 	}
+	str = *prompt;
+	c = **prompt;
 	result = ft_substr(*prompt - token_len, 0, token_len);
+	if (quote != NULL)
+		result = ft_strjoin(quote, result);
 	return (ft_lstnew(token_init(TEXT, result)));
 }
 

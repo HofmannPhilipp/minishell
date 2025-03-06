@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:51:28 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/05 10:12:55 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:16:46 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,46 +43,6 @@ int	is_builtin(char *cmd)
 	if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0)
 		return (1);
 	return (0);
-}
-
-static	int		nb_args(char **args)
-{
-	int		size;
-
-	size = 0;
-	while (args[size])
-		size++;
-	return (size);
-}
-
-void	exec_echo(t_exec_cmd *cmd)
-{
-	{
-		int		i;
-		int		n_option;
-		char	**args;
-
-		args = cmd->cmd_args;
-		i = 1;
-		n_option = 0;
-		if (nb_args(args) > 1)
-		{
-			while (args[i] && ft_strncmp(args[i], "-n", ft_strlen("-n")) == 0)
-			{
-				n_option = 1;
-				i++;
-			}
-			while (args[i])
-			{
-				ft_putstr_fd(args[i], 1);
-				if (args[i + 1] && args[i][0] != '\0' && !ft_strchr("'\"", args[i][0]) && !ft_strchr("'\"", args[i + 1][0]))
-					write(1, " ", 1);
-				i++;
-			}
-		}
-		if (n_option == 0)
-			write(1, "\n", 1);
-	}
 }
 
 void	exec_cd(t_exec_cmd *cmd)

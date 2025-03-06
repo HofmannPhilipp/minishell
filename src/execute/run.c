@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:49:13 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/01 01:18:30 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/05 13:11:31 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,35 @@
 void	run(t_cmd *cmd, char ***envp)
 {
 	if (!cmd)
-		return ;
+	return ;
 	if (cmd->type == BUILTIN)
 	{
 		run_builtins((t_exec_cmd *)cmd, envp);
 		return ;
 	}
 	if (fork_plus() == 0)
-	{
-		if (cmd->type == EXEC)
-			run_exec((t_exec_cmd *)cmd, *envp);
-		else if (cmd->type == PIPE)
-			run_pipe((t_pipe_cmd *)cmd, *envp);
-		else if (cmd->type == REDIR)
-			run_redir((t_redir_cmd *)cmd, *envp);
-		else if (cmd->type == HERE_DOC)
-			run_heredoc((t_heredoc_cmd *)cmd, *envp);
-		else if (cmd->type == SEQ)
-			run_seq((t_seq_cmd *)cmd, *envp);
-		else if (cmd->type == BACK)
-			run_back((t_back_cmd *)cmd, *envp);
-		exit(EXIT_SUCCESS);
-	}
+		run_cmds(cmd, envp);
 	wait(NULL);
 	g_pid = 0;
+}
+
+void	run_cmds(t_cmd *cmd, char ***envp)
+{
+	if (cmd->type == BUILTIN)
+		run_builtins((t_exec_cmd *)cmd, envp);
+	if (cmd->type == EXEC)
+		run_exec((t_exec_cmd *)cmd, *envp);
+	else if (cmd->type == PIPE)
+		run_pipe((t_pipe_cmd *)cmd, *envp);
+	else if (cmd->type == REDIR)
+		run_redir((t_redir_cmd *)cmd, *envp);
+	else if (cmd->type == HERE_DOC)
+		run_heredoc((t_heredoc_cmd *)cmd, *envp);
+	else if (cmd->type == SEQ)
+		run_seq((t_seq_cmd *)cmd, *envp);
+	else if (cmd->type == BACK)
+		run_back((t_back_cmd *)cmd, *envp);
+	exit(EXIT_SUCCESS);
 }
 
 void	run_pipe(t_pipe_cmd *pipe_cmd, char *envp[])
@@ -47,16 +52,16 @@ void	run_pipe(t_pipe_cmd *pipe_cmd, char *envp[])
 	int pid1;
 	int	pid2;
 	int	status;
-
+	
 	if (pipe(tunnel) < 0)
-		panic("pipe fail");
+	panic("pipe fail");
 	pid1 = fork_plus();
 	if (pid1 == 0)
 	{
 		close(tunnel[0]);
 		dup2(tunnel[1], STDOUT_FILENO);
 		close(tunnel[1]);
-		run(pipe_cmd->left, &envp);
+		run_cmds(pipe_cmd->left, &envp);
 	}
 	pid2 = fork_plus();
 	if (pid2 == 0)
@@ -64,7 +69,7 @@ void	run_pipe(t_pipe_cmd *pipe_cmd, char *envp[])
 		close(tunnel[1]);
 		dup2(tunnel[0], STDIN_FILENO);
 		close(tunnel[0]);
-		run(pipe_cmd->right, &envp);
+		run_cmds(pipe_cmd->right, &envp);
 	}
 	close(tunnel[0]);
 	close(tunnel[1]);
@@ -74,14 +79,14 @@ void	run_pipe(t_pipe_cmd *pipe_cmd, char *envp[])
 void	run_back(t_back_cmd *back, char *envp[])
 {
 	if (fork_plus() == 0)
-		run(back->left, &envp);
+	run(back->left, &envp);
 	exit(EXIT_SUCCESS);
 }
 
 void	run_seq(t_seq_cmd *seq, char *envp[])
 {
 	if (fork_plus() == 0)
-		run((t_cmd*)seq->left, &envp);
+	run((t_cmd*)seq->left, &envp);
 	wait(NULL);
 	run((t_cmd *)seq->right, &envp);
 }
@@ -93,8 +98,8 @@ void	run_redir(t_redir_cmd *redir, char *envp[])
 	int	saved_err;
 
 	saved_in = dup(STDIN_FILENO);
-	saved_out = dup(STDERR_FILENO);
-	saved_err = dup(STDOUT_FILENO);
+	saved_out = dup(STDOUT_FILENO);
+	saved_err = dup(STDERR_FILENO);
 	close(redir->fd);
 	if (open(redir->file, redir->mode, 0644) < 0)
 		panic("redir open failed");

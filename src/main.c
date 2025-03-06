@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:05:48 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/04 13:10:51 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:55:30 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main(int argc, char *argv[], char *envp[])
 	setup_signals();
 	while (1)
 	{
-		// input = "echo \"hallo '$USER'\"";
+		// input = "echo \"hello world''\"\"\"myname is\"'robin'\"";
 		input = read_prompt();
 		if (!input)
 		{
