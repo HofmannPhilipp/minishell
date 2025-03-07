@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:10:07 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/06 14:54:51 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:51:10 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ static t_list *parse_text(char **prompt)
 	str = *prompt;
 	c = **prompt;
 	result = ft_substr(*prompt - token_len, 0, token_len);
+	result = expand_str(result);
 	if (quote != NULL)
 		result = ft_strjoin(quote, result);
 	return (ft_lstnew(token_init(TEXT, result)));

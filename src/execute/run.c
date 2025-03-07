@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:49:13 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/05 13:11:31 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:25:46 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,17 @@ void	run_pipe(t_pipe_cmd *pipe_cmd, char *envp[])
 void	run_back(t_back_cmd *back, char *envp[])
 {
 	if (fork_plus() == 0)
-	run(back->left, &envp);
+		run(back->left, &envp);
 	exit(EXIT_SUCCESS);
 }
 
 void	run_seq(t_seq_cmd *seq, char *envp[])
 {
 	if (fork_plus() == 0)
-	run((t_cmd*)seq->left, &envp);
+	{
+		run((t_cmd*)seq->left, &envp);
+		exit(EXIT_SUCCESS);
+	}
 	wait(NULL);
 	run((t_cmd *)seq->right, &envp);
 }
