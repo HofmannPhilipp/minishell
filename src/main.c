@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:05:48 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/07 15:25:53 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:34:45 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ char	*read_prompt()
 	input = readline(prompt);
 	add_history(input);
 	return (input);
+}
+
+int	*get_exit_status(void)
+{
+	static int	exit_status = 0;
+	return (&exit_status);
 }
 
 int main(int argc, char *argv[], char *envp[])

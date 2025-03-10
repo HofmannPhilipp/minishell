@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:06:36 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/05 13:11:43 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:19:14 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,14 @@ typedef struct s_gc_manager
     t_gc_node *head;
 } 			t_gc_manager;
 
+int	*get_exit_status(void);
+
 //builtins
 int		is_builtin(char *cmd);
 void	run_builtins(t_exec_cmd *cmd, char ***envp);
 void	exec_cd(t_exec_cmd *cmd);
 void	exec_export(t_exec_cmd *cmd, char ***envp);
+void	exec_unset(t_exec_cmd *cmd, char ***envp);
 void	exec_echo(t_exec_cmd *cmd);
 void	add_env_var(char ***envp, char *value);
 

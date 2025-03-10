@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:51:28 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/05 15:16:46 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/10 13:41:08 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	run_builtins(t_exec_cmd *cmd, char ***envp)
 		exec_export(cmd, envp);
 	else if (ft_strncmp(builtin, "echo", len) == 0)
 		exec_echo(cmd);
+	else if (ft_strncmp(builtin, "unset", len) == 0)
+		exec_unset(cmd, envp);
 
 }
 
@@ -67,20 +69,5 @@ void	exec_cd(t_exec_cmd *cmd)
 		chdir(cmd->cmd_args[1]);
 }
 
-void	exec_export(t_exec_cmd *cmd, char ***envp)
-{
-	int	i;
 
-	i = 1;
-	if (cmd->cmd_args[i] == NULL)
-	{
-		print_export(*envp);
-		return ;
-	}
-	while (cmd->cmd_args[i] != NULL)
-	{
-		add_env_var(envp, cmd->cmd_args[i]);
-		i++;
-	}
-}
 

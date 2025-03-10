@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 10:40:51 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/04 15:35:28 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/10 13:38:07 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,21 @@ void	add_env_var(char ***envp, char *entry)
 	new_envp[i + 1] = NULL;
 	free(*envp);
 	*envp = new_envp;
+}
+
+void	exec_export(t_exec_cmd *cmd, char ***envp)
+{
+	int	i;
+
+	i = 1;
+	if (cmd->cmd_args[i] == NULL)
+	{
+		print_export(*envp);
+		return ;
+	}
+	while (cmd->cmd_args[i] != NULL)
+	{
+		add_env_var(envp, cmd->cmd_args[i]);
+		i++;
+	}
 }
