@@ -6,27 +6,13 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:49:13 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 12:23:44 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 13:01:11 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    run(t_cmd *cmd, char ***envp)
-{
-    if (!cmd)
-    	return ;
-    if (cmd->type == BUILTIN)
-    {
-        run_builtins((t_exec_cmd *)cmd, envp);
-        return ;
-    }
-    if (fork_plus() == 0)
-        run_cmds(cmd, envp);
-    wait(NULL);
-    g_pid = 0;
-}
-void    run_cmds(t_cmd *cmd, char ***envp) //done
+void    run(t_cmd *cmd, char ***envp) //done
 {
 	int	*exit_status;
 	

@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:05:48 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 12:23:07 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 13:18:49 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int main(int argc, char *argv[], char *envp[])
 		gc_free_all();
 		gc_print_list();
 		// free(input);
-		check_check();
+		// check_check();
 	}
 	rl_clear_history();
 	return (EXIT_SUCCESS);

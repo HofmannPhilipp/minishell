@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:43:47 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 12:22:13 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 13:12:00 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ static char	*replace_env_variable(char *str, int *i, char *result)
 	char	*env_value;
 	int		*exit_status;
 	
-	exit_status = get_exit_status();
-	if(ft_strncmp(str, "$?", ft_strlen("$?")) == 0)
-	{
-		result = ft_itoa(*exit_status);
-		(*i) += 2;
-		return (result);
-	}
 	if (ft_strchr("\t\n\v\f\r ", str[*i + 1]) || str[*i + 1] == '\0')
 	{
 		temp = result;
@@ -49,7 +42,13 @@ static char	*replace_env_variable(char *str, int *i, char *result)
 	}
 	(*i)++;
 	env_name = extract_env_name(str, i);
-	env_value = get_env_var(env_name);
+	if(ft_strncmp(env_name, "?", ft_strlen("?")) == 0)
+	{
+		exit_status = get_exit_status();
+		env_value = ft_itoa(*exit_status);
+	}
+	else
+		env_value = get_env_var(env_name);
 	free(env_name);
 	temp = result;
 	result = ft_strjoin_gc(temp, env_value);

@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:06:36 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 12:24:45 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 13:00:10 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
+
+int	*get_exit_status(void);
 
 //builtins
 int		is_builtin(char *cmd);
@@ -55,7 +57,7 @@ void	run_back(t_back_cmd *back, char *envp[]);
 void	run_seq(t_seq_cmd *seq, char *envp[]);
 void	run_redir(t_redir_cmd *redir, char *envp[]);
 void	run_heredoc(t_heredoc_cmd *heredoc, char *envp[]);
-void	run_cmds(t_cmd *cmd, char ***envp);
+void    run_cmds(t_cmd *cmd, char ***envp);
 
 // pipex_utils
 char	*get_envp(char *key, char *envp[]);
