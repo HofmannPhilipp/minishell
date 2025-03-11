@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/05 15:15:13 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 12:14:38 by phhofman         ###   ########.fr       */
+/*   Created: 2025/03/10 16:16:31 by phhofman          #+#    #+#             */
+/*   Updated: 2025/03/10 16:16:54 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-void	exec_echo(t_exec_cmd *cmd)
+void	exec_cd(t_exec_cmd *cmd)
 {
-	int		i;
-	int		flag;
-	char	**args;
+	char	*pwd;
+	char	*new_pwd;
 
-	args = cmd->cmd_args;
-	i = 1;
-	flag = 0;
-	while (args[i] && args[i][0] == '-' && args[i][1] == 'n' && args[i][2] == '\0')
+	if (ft_strncmp(cmd->cmd_args[0], "cd", 3) != 0)
+		return ;
+	if (cmd->cmd_args[1] == NULL)
+		chdir(getenv("HOME"));
+	else if (ft_strncmp(cmd->cmd_args[1], "..", 3) == 0)
 	{
-		flag = 1;
-		i++;
+		pwd = getcwd(NULL, 0);
+		new_pwd = ft_strrchr(pwd, '/');
+		if (!new_pwd)
+			return ;
+		*new_pwd = '\0';
+		chdir(pwd);
 	}
-	while (args[i])
-	{
-		ft_printf("%s", args[i]);
-		if (args[i + 1])
-			ft_printf(" ");
-		i++;
-	}
-	if (flag == 0)
-		ft_printf("\n");
+	else
+		chdir(cmd->cmd_args[1]);
 }

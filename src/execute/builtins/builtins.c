@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:51:28 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/10 13:41:08 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:16:48 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,7 @@ int	is_builtin(char *cmd)
 	return (0);
 }
 
-void	exec_cd(t_exec_cmd *cmd)
-{
-	char	*pwd;
-	char	*new_pwd;
 
-	if (ft_strncmp(cmd->cmd_args[0], "cd", 3) != 0)
-		return ;
-	if (cmd->cmd_args[1] == NULL)
-		chdir(getenv("HOME"));
-	else if (ft_strncmp(cmd->cmd_args[1], "..", 3) == 0)
-	{
-		pwd = getcwd(NULL, 0);
-		new_pwd = ft_strrchr(pwd, '/');
-		if (!new_pwd)
-			return ;
-		*new_pwd = '\0';
-		chdir(pwd);
-	}
-	else
-		chdir(cmd->cmd_args[1]);
-}
 
 
 
