@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:05:48 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/10 15:34:45 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/11 12:51:10 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int main(int argc, char *argv[], char *envp[])
 		list = tokenizer(input);
 		if (list)
 		{
-			ft_lstiter(list, print_tokens);
+			// ft_lstiter(list, print_tokens);
 			cmd = parse_cmd(&list);
-			print_ast(cmd, 0);
+			// print_ast(cmd, 0);
 			run(cmd, &envp);
 		}
 		// free(input);

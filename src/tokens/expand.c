@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:43:47 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/10 14:56:08 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:09:38 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ static char	*replace_env_variable(char *str, int *i, char *result)
 	char	*env_value;
 	int		*exit_status;
 	
-	exit_status = get_exit_status();
-	if(ft_strncmp(str, "$?", ft_strlen("$?")) == 0)
-	{
-		result = ft_itoa(*exit_status);
-		(*i) += 2;
-		return (result);
-	}
 	if (ft_strchr("\t\n\v\f\r ", str[*i + 1]) || str[*i + 1] == '\0')
 	{
 		temp = result;
@@ -49,7 +42,11 @@ static char	*replace_env_variable(char *str, int *i, char *result)
 	}
 	(*i)++;
 	env_name = extract_env_name(str, i);
-	env_value = get_env_var(env_name);
+	exit_status = get_exit_status();
+	if (ft_strncmp(env_name, "?", ft_strlen("?")) == 0)
+		env_value = ft_itoa(*exit_status);
+	else
+		env_value = get_env_var(env_name);
 	free(env_name);
 	temp = result;
 	result = ft_strjoin(temp, env_value);

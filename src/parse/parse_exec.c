@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 09:45:50 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 12:15:35 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/11 12:53:06 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ t_cmd	*parse_exec(t_list **list)
 	if (is_builtin(cmd_args[0]) == 1)
 		exec->type = BUILTIN;
 	exec->cmd_args = cmd_args; // ["cat", "-e", "Makefile"]
-	print_string_array(cmd_args);
 	return (cmd);
 }
 
