@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:43:47 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/04 16:20:04 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 12:22:13 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,15 @@ static char	*replace_env_variable(char *str, int *i, char *result)
 	char	*temp;
 	char	*env_name;
 	char	*env_value;
-
+	int		*exit_status;
+	
+	exit_status = get_exit_status();
+	if(ft_strncmp(str, "$?", ft_strlen("$?")) == 0)
+	{
+		result = ft_itoa(*exit_status);
+		(*i) += 2;
+		return (result);
+	}
 	if (ft_strchr("\t\n\v\f\r ", str[*i + 1]) || str[*i + 1] == '\0')
 	{
 		temp = result;

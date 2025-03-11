@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:05:48 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/07 15:19:07 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 12:23:07 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ char	*read_prompt()
 	return (input);
 }
 
+int	*get_exit_status(void)
+{
+	static int	exit_status = 0;
+	return (&exit_status);
+}
+
 int main(int argc, char *argv[], char *envp[])
 {
 	char	*input;
@@ -43,7 +49,7 @@ int main(int argc, char *argv[], char *envp[])
 	setup_signals();
 	while (1)
 	{
-		// input = "echo \"hallo '$USER'\"";
+		// input = "sleep 5; echo hallo";
 		input = read_prompt();
 		if (!input)
 		{

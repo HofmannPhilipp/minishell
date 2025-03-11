@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:55:46 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/01 00:40:04 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/10 13:45:25 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,30 @@ void	print_string_array(char **arr)
 	while (arr[i] != NULL)
 	{
 		ft_printf("%s\n", arr[i]);
+		i++;
+	}
+}
+void	print_export(char **env)
+{
+	char	*value;
+	char	*copy;
+	int 	i;
+	
+	i = 0;
+	
+	while (env[i] != NULL)
+	{
+		copy = ft_strdup(env[i]);
+		value = ft_strchr(copy, '=');
+		if (value)
+		{
+			*value = '\0';
+			value++;
+			ft_printf("declare -x %s=\"%s\"\n", copy, value);
+		}
+		else
+			ft_printf("declare -x %s\n", copy);
+		free(copy);
 		i++;
 	}
 }

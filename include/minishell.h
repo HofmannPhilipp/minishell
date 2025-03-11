@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:06:36 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/05 14:14:50 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 12:24:45 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ int		is_builtin(char *cmd);
 void	run_builtins(t_exec_cmd *cmd, char ***envp);
 void	exec_cd(t_exec_cmd *cmd);
 void	exec_export(t_exec_cmd *cmd, char ***envp);
-void	add_env_var(char ***envp, char *key, char *value);
+void	exec_unset(t_exec_cmd *cmd, char ***envp);
+void	exec_echo(t_exec_cmd *cmd);
+void	add_env_var(char ***envp, char *value);
 
 // utils
 char	*get_env_var(char *env_var);
@@ -37,6 +39,7 @@ int		fork_plus();
 void	reset_standard_fds(int in, int out, int err);
 char	*ft_char_to_str(char c);
 void	print_string_array(char **prompt);
+void	print_export(char **arr);
 void	print_list(t_list * list);
 void	print_tokens(t_list *tokens);
 void	free_str_arr(char **arr);
@@ -52,10 +55,10 @@ void	run_back(t_back_cmd *back, char *envp[]);
 void	run_seq(t_seq_cmd *seq, char *envp[]);
 void	run_redir(t_redir_cmd *redir, char *envp[]);
 void	run_heredoc(t_heredoc_cmd *heredoc, char *envp[]);
-void    run_cmds(t_cmd *cmd, char ***envp);
+void	run_cmds(t_cmd *cmd, char ***envp);
 
 // pipex_utils
-char	*get_envp(char *name, char *envp[]);
+char	*get_envp(char *key, char *envp[]);
 char	*get_cmd_path(char *cmd, char *envp[]);
 char	**get_paths(char *envp[]);
 void	handle_error(char *error_msg, int exit_status);

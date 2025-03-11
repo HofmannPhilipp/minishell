@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:36:15 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/07 14:19:05 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 12:23:57 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@ void	handle_error(char *error_msg, int exit_status)
 	exit(exit_status);
 }
 
-char	*get_envp(char *name, char *envp[])
+char	*get_envp(char *key, char *envp[])
 {
 	char	*sub;
 	int		i;
 	size_t	len;
 
-	len = ft_strlen(name);
+	len = ft_strlen(key);
 	i = 0;
 	while (envp[i] != NULL)
 	{
 		sub = ft_substr(envp[i], 0, len);
 		if (!sub)
 			return (NULL);
-		if (ft_strncmp(name, sub, len) == 0)
+		if (ft_strncmp(key, sub, len) == 0)
 		{
 			free(sub);
 			return (envp[i] + len + 1);
