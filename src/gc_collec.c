@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_collec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:05:17 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/04 14:46:06 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 13:31:55 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void gc_free_all(void)
 
     gc = get_gc_instance();
 	node = gc->head;
-    ft_printf("FREE_ALL FUNCTION .........\n");
+    // ft_printf("FREE_ALL FUNCTION .........\n");
     while (node) 
 	{
         next = node->next;

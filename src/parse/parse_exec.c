@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 09:45:50 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 12:22:56 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/12 14:30:48 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	**create_cmd_args(t_list *list);
 
-t_cmd	*parse_exec(t_list **list) //done
+t_cmd	*parse_exec(t_list **list)
 {
 	t_cmd		*cmd;
 	t_exec_cmd	*exec;
@@ -43,7 +43,6 @@ t_cmd	*parse_exec(t_list **list) //done
 	if (is_builtin(cmd_args[0]) == 1)
 		exec->type = BUILTIN;
 	exec->cmd_args = cmd_args; // ["cat", "-e", "Makefile"]
-	print_string_array(cmd_args);
 	return (cmd);
 }
 

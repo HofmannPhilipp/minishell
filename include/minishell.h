@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:06:36 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 12:24:45 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/12 14:41:12 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <readline/readline.h>
 # include <signal.h>
 
+
+int	*get_exit_status(void);
+
 //builtins
 int		is_builtin(char *cmd);
 void	run_builtins(t_exec_cmd *cmd, char ***envp);
@@ -29,6 +32,8 @@ void	exec_cd(t_exec_cmd *cmd);
 void	exec_export(t_exec_cmd *cmd, char ***envp);
 void	exec_unset(t_exec_cmd *cmd, char ***envp);
 void	exec_echo(t_exec_cmd *cmd);
+void	exec_pwd(void);
+void	exec_exit(t_exec_cmd *cmd);
 void	add_env_var(char ***envp, char *value);
 
 // utils
@@ -61,7 +66,7 @@ void	run_cmds(t_cmd *cmd, char ***envp);
 char	*get_envp(char *key, char *envp[]);
 char	*get_cmd_path(char *cmd, char *envp[]);
 char	**get_paths(char *envp[]);
-void	handle_error(char *error_msg, int exit_status);
+void	handle_error(char *msg, int exit_code);
 
 // parse
 void 	print_ast(t_cmd *cmd, int depth);

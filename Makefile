@@ -11,14 +11,9 @@ SRCS =	main.c \
 		parse_cmd.c parse_block.c parse_line.c parse_exec.c parse_pipe.c parse_redir.c \
 		cmd_init.c print_ast.c \
 		tokenizer.c token_init.c expand.c quote_prompt.c heredoc_prompt.c \
-<<<<<<< HEAD
-		utils.c ft_split2.c free.c print.c \
-		signals.c builtins.c export.c \
-		gc_collec.c gc_functions.c
-=======
 		utils.c ft_split2.c free.c print.c\
-		signals.c gbcollec.c builtins.c export.c echo.c unset.c cd.c
->>>>>>> builtins
+		signals.c builtins.c export.c echo.c unset.c cd.c pwd.c exit.c \
+		gc_collec.c gc_functions.c
 
 OBJS_DIR = objects
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))

@@ -6,11 +6,31 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 10:40:51 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/10 13:38:07 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:35:32 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	is_valid_identifier(const char *str)
+{
+	int i;
+
+	if (!str || str[0] == '\0')
+		return (0);
+	
+	if (!ft_isalpha(str[0]) && str[0] != '_')
+		return (0);
+	
+	i = 1;
+	while(str[i] != '\0')
+	{
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 void	replace_env_entry(char ***envp, char *key, char *entry)
 {
@@ -35,12 +55,20 @@ void	add_env_var(char ***envp, char *entry)
 	char	*value;
 	int		i;
 	char	*key;
+	int		*exit_status;
 	
+	exit_status = get_exit_status();
 	key = ft_strdup(entry);
 	entry = ft_strdup(entry);
 	value = ft_strchr(key, '=');
 	if (value)
 		*value = '\0';
+	if (is_valid_identifier(key) == 0)
+	{
+		ft_putstr_fd("not a valid identifier\n", STDERR_FILENO);
+		*exit_status = EXIT_FAILURE;
+		return ;
+	}
 	if (get_envp(key, *envp) != NULL)
 	{
 		replace_env_entry(envp, key, entry);

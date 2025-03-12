@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:05:48 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 12:23:07 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/12 15:01:59 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ int main(int argc, char *argv[], char *envp[])
 	setup_signals();
 	while (1)
 	{
-		// input = "sleep 5; echo hallo";
+		// input = "echo <missing <\"./minishell_tester/test_files/infile\" <missing";
 		input = read_prompt();
 		if (!input)
 		{
-			ft_printf("exit");
+			ft_printf("exit\n");
 			exit(EXIT_SUCCESS);
 		}
 		list = tokenizer(input); //done
@@ -64,11 +64,11 @@ int main(int argc, char *argv[], char *envp[])
 			// print_ast(cmd, 0);
 			run(cmd, &envp);
 		}
-		gc_print_list();
+		// gc_print_list();
 		gc_free_all();
-		gc_print_list();
+		// gc_print_list();
 		// free(input);
-		check_check();
+		// check_check();
 	}
 	rl_clear_history();
 	return (EXIT_SUCCESS);
