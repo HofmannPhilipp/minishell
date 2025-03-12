@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:06:36 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 13:00:10 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 13:45:45 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
+# include <sys/wait.h>
 
 int	*get_exit_status(void);
 
@@ -90,6 +91,6 @@ char	*open_heredoc_prompt(char *delimeter);
 
 // signals
 void setup_signals(void);
-int g_pid;
+// int g_pid;
 
 #endif

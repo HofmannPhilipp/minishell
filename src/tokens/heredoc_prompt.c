@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 08:58:01 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/04 15:44:05 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 16:00:53 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*open_heredoc_prompt(char *delimeter)
 	char	*temp;
 	char	*input;
 
-	result = ft_strdup("");
+	result = ft_strdup_gc("");
 	while(1)
 	{
 		input = readline("heredoc> ");
@@ -34,10 +34,10 @@ char	*open_heredoc_prompt(char *delimeter)
 			break;
 		}
 		temp = ft_strjoin_gc(input, "\n");
-		free(input);
-		input = ft_strjoin(result, temp);
-		gc_free_one(temp);
-		free(result);
+		// free(input);
+		input = ft_strjoin_gc(result, temp);
+		// gc_free_one(temp);
+		// free(result);
 		result = input;
 	}
 	return (result);

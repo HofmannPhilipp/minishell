@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 10:40:51 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/10 13:38:07 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:47:33 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	add_env_var(char ***envp, char *entry)
 	int		i;
 	char	*key;
 	
-	key = ft_strdup(entry);
+	key = ft_strdup_gc(entry);
 	entry = ft_strdup(entry);
 	value = ft_strchr(key, '=');
 	if (value)

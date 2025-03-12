@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:16:31 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/10 16:16:54 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:16:27 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	exec_cd(t_exec_cmd *cmd)
 			return ;
 		*new_pwd = '\0';
 		chdir(pwd);
+		free(pwd);
 	}
 	else
 		chdir(cmd->cmd_args[1]);

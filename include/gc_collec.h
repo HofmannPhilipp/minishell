@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 14:30:23 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/05 15:15:29 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 15:36:52 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_token	*token_init_gc(int type, char *value);
 t_list	*ft_lstnew_gc(void *content);
 t_token	*token_init_gc(int type, char *value);
 char	**ft_split_gc(char const *s, char c);
+char	*ft_itoa_gc(int n);
+
 
 
 #endif

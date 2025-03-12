@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:05:48 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 13:18:49 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/12 13:15:21 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int main(int argc, char *argv[], char *envp[])
 	(void)argc;
 	(void)argv;
 	envp = copy_env(envp);
-	g_pid = 0;
-	setup_signals();
+	// g_pid = 0;
+	// setup_signals();
 	while (1)
 	{
 		// input = "sleep 5; echo hallo";
@@ -56,20 +56,21 @@ int main(int argc, char *argv[], char *envp[])
 			ft_printf("exit");
 			exit(EXIT_SUCCESS);
 		}
-		list = tokenizer(input); //done
+		list = tokenizer(input); 
 		if (list)
 		{
 			// ft_lstiter(list, print_tokens);
-			cmd = parse_cmd(&list); //done
+			cmd = parse_cmd(&list); 
 			// print_ast(cmd, 0);
 			run(cmd, &envp);
 		}
-		gc_print_list();
+		// gc_print_list();
 		gc_free_all();
-		gc_print_list();
+		// gc_print_list();
 		// free(input);
 		// check_check();
 	}
+	free_str_arr(envp);
 	rl_clear_history();
 	return (EXIT_SUCCESS);
 }

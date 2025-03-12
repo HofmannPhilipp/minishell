@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:37 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/05 12:56:11 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/12 11:22:33 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ void	panic(char *error_msg)
 
 int	fork_plus()
 {
-	g_pid = fork();
-	if (g_pid < 0)
+	int	pid;
+
+	pid = fork();
+	if (pid < 0)
 		panic("fork fail");
-	return (g_pid);
+	return (pid);
 }
 
 char	*ft_char_to_str(char c)
@@ -45,9 +47,9 @@ char	*get_env_var(char *env_var)
 
 	value = getenv(env_var);
 	if (!value)
-		value = ft_strdup("");
+		value = ft_strdup_gc("");
 	else
-		value = ft_strdup(value);
+		value = ft_strdup_gc(value);
 	return (value);
 }
 

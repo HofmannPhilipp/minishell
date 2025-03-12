@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:51:28 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 12:24:04 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/12 13:14:33 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	run_builtins(t_exec_cmd *cmd, char ***envp) //done
 		exec_echo(cmd);
 	else if (ft_strncmp(builtin, "unset", len) == 0)
 		exec_unset(cmd, envp);
-
 }
 
 int	is_builtin(char *cmd)

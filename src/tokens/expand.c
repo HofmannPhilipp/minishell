@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:43:47 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 13:12:00 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 15:44:45 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*extract_env_name(char *str, int *i)
 	start = (*i);
 	while (str[*i] && !ft_strchr("\t\n\v\f\r '\"();|&<>$", str[*i]))
 		(*i)++;
-	env_name = ft_substr(str, start, *i - start);
+	env_name = ft_substr_gc(str, start, *i - start);
 	if (!env_name)
 		panic("malloc fail");
 	return (env_name);
@@ -45,15 +45,15 @@ static char	*replace_env_variable(char *str, int *i, char *result)
 	if(ft_strncmp(env_name, "?", ft_strlen("?")) == 0)
 	{
 		exit_status = get_exit_status();
-		env_value = ft_itoa(*exit_status);
+		env_value = ft_itoa_gc(*exit_status);
 	}
 	else
 		env_value = get_env_var(env_name);
-	free(env_name);
+	// free(env_name);
 	temp = result;
 	result = ft_strjoin_gc(temp, env_value);
-	free(env_value);
-	free(temp);
+	// free(env_value);
+	// free(temp);
 	if (!result)
 		panic("malloc fail");
 	return (result);
@@ -73,7 +73,7 @@ static char	*append_normal_text(char *str, int *i, char *result)
 		panic ("malloc fail");
 	temp = result;
 	result = ft_strjoin_gc(temp, text_part);
-	free(temp);
+	// free(temp);
 	free(text_part);
 	if (!result)
 		panic("malloc fail");

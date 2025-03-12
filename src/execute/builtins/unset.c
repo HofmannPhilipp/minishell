@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:39:35 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/10 13:38:33 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:35:41 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	del_env_var(char ***envp, char *key)
 	len = 0;
 	while ((*envp)[len] != NULL)
 		len++;
-	new_envp = (char **)malloc(sizeof(char *) * len);
+	new_envp = (char **)gc_alloc(sizeof(char *) * len);
 	new_envp[len] = NULL;
 	i = 0;
 	j = 0;
@@ -48,12 +48,10 @@ void	exec_unset(t_exec_cmd *cmd, char ***envp)
 	int	i;
 
 	i = 1;
-	if (cmd->cmd_args[i] == NULL)
-		return ;
 	
-		while (cmd->cmd_args[i] != NULL)
-		{
-			del_env_var(envp, cmd->cmd_args[i]);
-			i++;
-		}
+	while (cmd->cmd_args[i] != NULL)
+	{
+		del_env_var(envp, cmd->cmd_args[i]);
+		i++;
+	}
 }

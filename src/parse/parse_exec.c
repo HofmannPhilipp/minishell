@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 09:45:50 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 12:54:02 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 15:46:49 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static char	**create_cmd_args(t_list *list)
 		head = head->next;
 		len ++;
 	}
-	cmd_args = (char **)malloc(sizeof(char *) * (len + 1));
+	cmd_args = (char **)gc_alloc(sizeof(char *) * (len + 1));
 	cmd_args[len] = NULL;
 	return (cmd_args);
 }

@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:49:13 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 13:01:11 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 13:49:59 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void    run(t_cmd *cmd, char ***envp) //done
 		run_cmds(cmd, envp);
 	exit_status = get_exit_status();
 	wait(exit_status);
-	g_pid = 0;
+	// g_pid = 0;
 }
 
 void	run_cmds(t_cmd *cmd, char ***envp)
@@ -49,7 +49,8 @@ void	run_cmds(t_cmd *cmd, char ***envp)
 		run_seq((t_seq_cmd *)cmd, *envp);
 	else if (cmd->type == BACK)
 		run_back((t_back_cmd *)cmd, *envp);
-	exit(EXIT_FAILURE);
+	gc_free_all();
+	exit(*exit_status);
 }
 
 void	run_pipe(t_pipe_cmd *pipe_cmd, char *envp[])

@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:10:07 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 12:22:04 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/11 16:05:54 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,19 @@ static	char	*parse_qoutes(char **prompt, char quote_type)
 {
 	int		token_len;
 	char	*result;
-	char c;
-	char *str;
 	token_len = 0;
 	(*prompt)++;
-	c = **prompt;
 	while (**prompt != '\0' && **prompt != quote_type)
 	{
-		c = **prompt;
-		str = *prompt;
 		token_len++;
 		(*prompt)++;
 	}
 	if (token_len == 0)
 	{
 		(*prompt)++;
-		return (ft_strdup(""));
+		return (ft_strdup_gc(""));
 	}
-	c = **prompt;
-	str = *prompt;
-	result = ft_substr(*prompt - token_len, 0, token_len);
+	result = ft_substr_gc(*prompt - token_len, 0, token_len);
 	if (**prompt != quote_type)
 		result = open_quote_prompt(result, quote_type);
 	if (quote_type == '"')
@@ -67,31 +60,24 @@ static	char	*parse_qoutes(char **prompt, char quote_type)
 static t_list *parse_text(char **prompt)
 {
 	int		token_len;
-	char	quote_type;
 	char	*result;
-	char	*str;
 	char	*temp;
 	char	*quote;
 	token_len = 0;
-	quote_type = 0;
 
-	char c;
-	quote = ft_strdup("");
+	quote = ft_strdup_gc("");
 	while (**prompt != '\0')
 	{
-		c = **prompt;
-		str = *prompt;
 		if((**prompt == '"' || **prompt == '\''))
 		{
 			if (token_len > 0)
 			{
-				result = ft_substr(*prompt - token_len, 0, token_len);
-				quote = ft_strjoin(quote, result);
+				result = ft_substr_gc(*prompt - token_len, 0, token_len);
+				quote = ft_strjoin_gc(quote, result);
 			}
 			temp = parse_qoutes(prompt, **prompt);
-			str = *prompt;
-			c = **prompt;
-			quote = ft_strjoin(quote, temp);
+
+			quote = ft_strjoin_gc(quote, temp);
 			token_len = 0;
 			continue;
 		}
@@ -100,13 +86,12 @@ static t_list *parse_text(char **prompt)
 		(*prompt)++;
 		token_len++;
 	}
-	str = *prompt;
-	c = **prompt;
-	result = ft_substr(*prompt - token_len, 0, token_len);
+
+	result = ft_substr_gc(*prompt - token_len, 0, token_len);
 	result = expand_str(result);
 	if (quote != NULL)
-		result = ft_strjoin(quote, result);
-	return (ft_lstnew(token_init(TEXT, result)));
+		result = ft_strjoin_gc(quote, result);
+	return (ft_lstnew_gc(token_init_gc(TEXT, result)));
 }
 
 static t_list *parse_operator(char **prompt)
@@ -126,7 +111,7 @@ static t_list *parse_operator(char **prompt)
 	return (ft_lstnew_gc(token_init_gc(token_type, op)));
 }
 
-static t_list *parse_heredoc(char **prompt)
+static t_list *parse_heredoc(char **prompt) //done
 {
 	int		token_len;
 	char	*delimeter;
@@ -149,7 +134,7 @@ static t_list *parse_heredoc(char **prompt)
 	return(ft_lstnew_gc(token_init_gc(HERE_DOC, result)));
 }
 
-t_list	*tokenizer(char *prompt)
+t_list	*tokenizer(char *prompt) //done
 {
 	t_list	*tokens;
 	t_list	*node;
@@ -167,8 +152,8 @@ t_list	*tokenizer(char *prompt)
 		else if (is_symbol(prompt, 0) == 'a')
 			node = parse_text(&prompt); //done
 		else
-			node = parse_operator(&prompt); //done
-		ft_lstadd_back(&tokens, node); //done
+			node = parse_operator(&prompt); 
+		ft_lstadd_back(&tokens, node); 
 	}
 	return (tokens);
 }
