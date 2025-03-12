@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:51:28 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/12 13:14:33 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/12 16:15:43 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void	run_builtins(t_exec_cmd *cmd, char ***envp) //done
 		exec_echo(cmd);
 	else if (ft_strncmp(builtin, "unset", len) == 0)
 		exec_unset(cmd, envp);
+	else if (ft_strncmp(builtin, "pwd", len) == 0)
+		exec_pwd();
+	else if (ft_strncmp(builtin, "exit", len) == 0)
+		exec_exit(cmd);
 }
 
 int	is_builtin(char *cmd)
@@ -42,6 +46,8 @@ int	is_builtin(char *cmd)
 	if (ft_strncmp(cmd, "unset", ft_strlen("unset")) == 0)
 		return (1);
 	if (ft_strncmp(cmd, "exit", ft_strlen("exit")) == 0)
+		return (1);
+	if (ft_strncmp(cmd, "pwd", ft_strlen("pwd")) == 0)
 		return (1);
 	return (0);
 }

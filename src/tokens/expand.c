@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:43:47 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 15:44:45 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/12 16:11:17 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static char	*append_normal_text(char *str, int *i, char *result)
 		panic ("malloc fail");
 	temp = result;
 	result = ft_strjoin_gc(temp, text_part);
-	// free(temp);
 	free(text_part);
 	if (!result)
 		panic("malloc fail");

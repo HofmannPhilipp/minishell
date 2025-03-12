@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:37 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/12 11:22:33 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/12 16:10:18 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,17 @@ void	panic(char *error_msg)
 	if (error_msg)
 		ft_printf("%s",error_msg);
 	exit(EXIT_FAILURE);
+}
+
+void	handle_error(char	*msg, int exit_code)
+{
+	int	*exit_status;
+
+	exit_status = get_exit_status();
+	*exit_status = exit_code;
+	if (msg)
+		ft_putstr_fd(msg, STDERR_FILENO);
+	exit(exit_code);
 }
 
 int	fork_plus()

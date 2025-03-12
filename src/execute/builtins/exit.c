@@ -1,16 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 10:04:51 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/12 11:19:10 by phhofman         ###   ########.fr       */
+/*   Created: 2025/03/12 10:58:00 by phhofman          #+#    #+#             */
+/*   Updated: 2025/03/12 13:14:19 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "minishell.h"
+
+static int	ft_atoi2(const char *str);
+
+void	exec_exit(t_exec_cmd *cmd)
+{
+	uint8_t	code;
+	
+	ft_printf("exit\n");
+	if (cmd->cmd_args[1] == NULL)
+		exit(EXIT_SUCCESS);
+	code = ft_atoi2(cmd->cmd_args[1]);
+	if (cmd->cmd_args[2] != NULL)
+	{
+		ft_putstr_fd("too many arguments\n", STDERR_FILENO);
+		code = 1;
+	}
+	exit(code);
+}
 
 static int	ft_iswhitespace(char c)
 {
@@ -19,7 +37,7 @@ static int	ft_iswhitespace(char c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+static int	ft_atoi2(const char *str)
 {
 	int		sign;
 	int		sum;
@@ -38,6 +56,11 @@ int	ft_atoi(const char *str)
 	{
 		sum = sum * 10 + (*str - '0');
 		str ++;
+	}
+	if (*str != '\0')
+	{
+		ft_putstr_fd("numeric argument required\n", STDERR_FILENO);
+		return (255);
 	}
 	return (sign * sum);
 }

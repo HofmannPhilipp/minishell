@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   run.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:49:13 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/12 15:22:09 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/12 16:13:34 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    run(t_cmd *cmd, char ***envp) //done
+void    run(t_cmd *cmd, char ***envp)
 {
 	int	*exit_status;
 	
@@ -27,13 +27,12 @@ void    run(t_cmd *cmd, char ***envp) //done
 		run_cmds(cmd, envp);
 	exit_status = get_exit_status();
 	wait(exit_status);
+	if ((*exit_status & 0x7F) == 0)
+		*exit_status = (*exit_status >> 8) & 0xFF;
 }
 
 void	run_cmds(t_cmd *cmd, char ***envp)
 {
-	int	*exit_status;
-	exit_status = get_exit_status();
-
 	if (cmd->type == BUILTIN)
 		run_builtins((t_exec_cmd *)cmd, envp);
 	if (cmd->type == EXEC)
@@ -50,7 +49,7 @@ void	run_cmds(t_cmd *cmd, char ***envp)
 		run_back((t_back_cmd *)cmd, *envp);
 	gc_free_all();
 	setup_signals(1);
-	exit(*exit_status);
+	exit(EXIT_SUCCESS);
 }
 
 void	run_pipe(t_pipe_cmd *pipe_cmd, char *envp[])
@@ -115,13 +114,13 @@ void    run_redir(t_redir_cmd *redir, char *envp[]) //done
 	saved_err = dup(STDERR_FILENO);
 	close(redir->fd);
 	if (open(redir->file, redir->mode, 0644) < 0)
-		panic("redir open failed");
+		handle_error("No such file or directory\n", EXIT_FAILURE);
 	run_cmds(redir->cmd, &envp);
 	reset_standard_fds(saved_in, saved_out, saved_err);
 }
 void    run_heredoc(t_heredoc_cmd *heredoc, char *envp[])
 {
-		int tunnel[2];
+	int tunnel[2];
 
 	if (pipe(tunnel) == -1)
 		panic("pipe failed");

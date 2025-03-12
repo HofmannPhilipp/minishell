@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 09:45:50 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 15:46:49 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/12 16:11:45 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char	**create_cmd_args(t_list *list);
 
-t_cmd	*parse_exec(t_list **list) //done
+t_cmd	*parse_exec(t_list **list)
 {
 	t_cmd		*cmd;
 	t_exec_cmd	*exec;
