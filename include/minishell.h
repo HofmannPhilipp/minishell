@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:06:36 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 13:45:45 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/12 14:46:35 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ char	*open_quote_prompt(char *input, char qoute_type);
 char	*open_heredoc_prompt(char *delimeter);
 
 // signals
-void setup_signals(void);
-// int g_pid;
+void setup_signals(int	in_child);
 
 #endif
