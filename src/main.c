@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:05:48 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/13 14:03:43 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/13 14:44:17 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void check_check()
 {
     system("leaks minishell");
 }
-
 
 char	*read_prompt()
 {

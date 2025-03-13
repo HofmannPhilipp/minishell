@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 09:51:12 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/05 14:28:36 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/12 16:28:26 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd	*parse_line(t_list **list) //done
+t_cmd	*parse_line(t_list **list)
 {
 	t_cmd	*cmd;
 	t_token	*token;
@@ -33,7 +33,7 @@ t_cmd	*parse_line(t_list **list) //done
 	}
 	else if (token->type == SEQ)
 	{
-		*list = (*list)->next; // maybe to much can cause error
+		*list = (*list)->next;
 		cmd = seq_cmd_init(cmd, parse_line(list));
 	}
 	return (cmd);
