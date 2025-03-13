@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:05:17 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/12 15:05:42 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/13 10:12:03 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void gc_print_list(void)
         current = current->next;
     }
 }
-t_gc_manager* get_gc_instance() 
+t_gc_manager* get_gc_instance()
 {
     static t_gc_manager gc = {NULL};
     return (&gc);

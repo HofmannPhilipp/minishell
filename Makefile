@@ -12,7 +12,8 @@ SRCS =	main.c \
 		cmd_init.c print_ast.c \
 		tokenizer.c token_init.c expand.c quote_prompt.c heredoc_prompt.c \
 		utils.c ft_split2.c free.c print.c\
-		signals.c gc_functions.c gc_collec.c builtins.c export.c echo.c unset.c cd.c
+		signals.c gc_functions.c gc_collec.c exit_cleanup_list.c ecl_functions.c \
+		builtins.c export.c echo.c unset.c cd.c
 
 OBJS_DIR = objects
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))

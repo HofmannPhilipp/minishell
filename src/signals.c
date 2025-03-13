@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:23:23 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/12 15:29:50 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/13 09:59:52 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void setup_signals(int in_child)
 {
 	struct sigaction sa;
 	
+	sigemptyset(&sa.sa_mask);
 	if (in_child)
 		sa.sa_handler = &parent_handler;
 	else
