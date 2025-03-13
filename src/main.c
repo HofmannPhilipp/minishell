@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:05:48 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/13 11:13:41 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:03:43 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main(int argc, char *argv[], char *envp[])
 	(void)argc;
 	(void)argv;
 	envp = copy_env(envp);
-	// setup_signals();
+	setup_signals(1);
 	while (1)
 	{
 		// input = "echo <missing <\"./minishell_tester/test_files/infile\" <missing";
@@ -66,6 +66,7 @@ int main(int argc, char *argv[], char *envp[])
 			setup_signals(0);
 			run(cmd, &envp);
 		}
+		setup_signals(1);
 		// gc_print_list();
 		gc_free_all();
 		// gc_print_list();

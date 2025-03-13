@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:10:22 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/12 10:43:37 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:48:52 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,5 @@ void	exec_pwd(void)
 
 	pwd = getcwd(NULL, 0);
 	ft_printf("%s\n", pwd);
+	free(pwd);
 }
