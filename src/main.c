@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:05:48 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/13 10:28:40 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/13 11:13:41 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ int main(int argc, char *argv[], char *envp[])
 	// setup_signals();
 	while (1)
 	{
-		setup_signals(1);
-		// input = "sleep 5; echo hallo";
+		// input = "echo <missing <\"./minishell_tester/test_files/infile\" <missing";
 		input = read_prompt();
 		if (!input)
 		{

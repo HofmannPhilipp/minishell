@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:36:15 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 12:23:57 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/12 14:40:51 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	handle_error(char *error_msg, int exit_status)
-{
-	if (error_msg)
-		ft_printf("%s\n", error_msg);
-	else
-		perror(NULL);
-	exit(exit_status);
-}
 
 char	*get_envp(char *key, char *envp[])
 {
