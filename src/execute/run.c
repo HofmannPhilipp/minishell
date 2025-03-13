@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:49:13 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/12 16:13:34 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:07:59 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void    run(t_cmd *cmd, char ***envp)
 		run_builtins((t_exec_cmd *)cmd, envp);
 		return ;
 	}
+	setup_signals(0);
 	if (fork_plus() == 0)
 		run_cmds(cmd, envp);
 	exit_status = get_exit_status();

@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:05:48 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/12 16:10:04 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:07:50 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main(int argc, char *argv[], char *envp[])
 	(void)argc;
 	(void)argv;
 	envp = copy_env(envp);
-	// setup_signals();
+	setup_signals(1);
 	while (1)
 	{
 		// input = "echo <missing <\"./minishell_tester/test_files/infile\" <missing";
@@ -62,7 +62,7 @@ int main(int argc, char *argv[], char *envp[])
 			// ft_lstiter(list, print_tokens);
 			cmd = parse_cmd(&list); 
 			// print_ast(cmd, 0);
-			setup_signals(0);
+
 			run(cmd, &envp);
 		}
 		// gc_print_list();

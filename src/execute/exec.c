@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:52:06 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/12 16:14:00 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:27:43 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	run_exec(t_exec_cmd	*exec, char *envp[])
 		// free cmd_args and t_cmd exec
 		if (exec->cmd_args[0])
 		handle_error("command not found\n", 127);
-		
 	}
 	execve(cmd_path, exec->cmd_args, envp);
 	panic("fail execve exec");

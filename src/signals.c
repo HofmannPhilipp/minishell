@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:23:23 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/12 16:11:36 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:26:32 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 static void parent_handler(int sig)
 {
-	// write(1,"P",1);
 	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
-		rl_replace_line("", 0);  
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 	else if (sig == SIGQUIT)
@@ -34,7 +33,6 @@ static void child_handler(int sig)
 	int *exit_status;
 	
 	exit_status = get_exit_status();
-	// write(1,"C",1);
 
 	if (sig == SIGINT)
 	{
