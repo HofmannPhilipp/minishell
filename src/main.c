@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:05:48 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/13 11:07:50 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:14:53 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int main(int argc, char *argv[], char *envp[])
 		if (!input)
 		{
 			ft_printf("exit\n");
+			ecl_free_all();
 			//ERROR CODE AENDERN VLLT 131
 			exit(EXIT_SUCCESS);
 		}
@@ -71,7 +72,6 @@ int main(int argc, char *argv[], char *envp[])
 		// free(input);
 		// check_check();
 	}
-	free_str_arr(envp);
 	rl_clear_history();
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:37 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/12 16:10:18 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:13:47 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ char	**copy_env(char *envp[])
 	len = 0;
 	while (envp[len] != NULL)
 		len++;
-	copy = (char **)malloc(sizeof(char *) * (len + 1));
+	copy = (char **)ecl_alloc(sizeof(char *) * (len + 1));
 	len = 0;
 	while (envp[len] != NULL)
 	{
-		copy[len] = ft_strdup(envp[len]);
+		copy[len] = ft_strdup_ecl(envp[len]);
 		len++;
 	}
 	copy[len] = NULL;

@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:23:23 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/12 16:26:32 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:14:45 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void setup_signals(int in_child)
 {
 	struct sigaction sa;
 	
+	sigemptyset(&sa.sa_mask);
 	if (in_child)
 		sa.sa_handler = &parent_handler;
 	else
