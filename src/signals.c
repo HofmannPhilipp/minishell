@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:23:23 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/13 14:40:46 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/13 14:47:58 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,21 @@
 
 static void parent_handler(int sig)
 {
+	int *exit_status;
+	
+	exit_status = get_exit_status();
 	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		*exit_status = 1;
 	}
 	else if (sig == SIGQUIT)
 	{
 		(void)sig;
+		*exit_status = 0;
 	}
 	return ;
 }
