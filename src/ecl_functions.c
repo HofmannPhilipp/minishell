@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ecl_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 16:30:36 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/13 10:25:19 by cwolf            ###   ########.fr       */
+/*   Created: 2025/03/13 10:26:53 by cwolf             #+#    #+#             */
+/*   Updated: 2025/03/13 10:27:28 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "minishell.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup_ecl(const char *s1)
 {
 	size_t	len;
 	char	*dup;
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s1)
 	if (!s1)
 		return (NULL);
 	len = ft_strlen(s1);
-	dup = (char *)malloc(sizeof(char) * (len + 1));
+	dup = (char *)ecl_alloc(sizeof(char) * (len + 1));
 	if (dup == NULL)
 		return (NULL);
 	ft_strlcpy(dup, s1, len + 1);
