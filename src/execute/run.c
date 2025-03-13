@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:49:13 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/13 11:07:59 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:23:55 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,17 @@ void    run(t_cmd *cmd, char ***envp)
 		run_cmds(cmd, envp);
 	exit_status = get_exit_status();
 	wait(exit_status);
-	if ((*exit_status & 0x7F) == 0)
+	if ((*exit_status & 0x7F) > 0)
+		*exit_status = 128 + (*exit_status & 0x7F);
+	else if ((*exit_status & 0x7F) == 0)
 		*exit_status = (*exit_status >> 8) & 0xFF;
 }
 
 void	run_cmds(t_cmd *cmd, char ***envp)
 {
+	int	*exit_status;
+
+	exit_status = get_exit_status();
 	if (cmd->type == BUILTIN)
 		run_builtins((t_exec_cmd *)cmd, envp);
 	if (cmd->type == EXEC)
@@ -50,7 +55,7 @@ void	run_cmds(t_cmd *cmd, char ***envp)
 		run_back((t_back_cmd *)cmd, *envp);
 	gc_free_all();
 	setup_signals(1);
-	exit(EXIT_SUCCESS);
+	exit(*exit_status);
 }
 
 void	run_pipe(t_pipe_cmd *pipe_cmd, char *envp[])
@@ -78,17 +83,21 @@ void	run_pipe(t_pipe_cmd *pipe_cmd, char *envp[])
 		close(tunnel[0]);
 		run_cmds(pipe_cmd->right, &envp);
 	}
-	exit_status = get_exit_status();
 	close(tunnel[0]);
 	close(tunnel[1]);
-	waitpid(pid1, exit_status, 0);
+	exit_status = get_exit_status();
+	waitpid(pid1, NULL, 0);
 	waitpid(pid2, exit_status, 0);
+	if ((*exit_status & 0x7F) > 0)
+		*exit_status = 128 + (*exit_status & 0x7F);
+	else if ((*exit_status & 0x7F) == 0)
+		*exit_status = (*exit_status >> 8) & 0xFF;
 }
 
 void	run_back(t_back_cmd *back, char *envp[])
 {
     if (fork_plus() == 0)
-		run(back->left, &envp);
+		run_cmds(back->left, &envp);
     exit(EXIT_SUCCESS);
 }
 void    run_seq(t_seq_cmd *seq, char *envp[])
