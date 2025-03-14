@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:35:24 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 14:29:11 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:23:33 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ char *remove_char(const char *str, char c)
 		i++;
 	}
 	new_str = gc_alloc(sizeof(char) * (new_len + 1));
-	if (!new_str)
-		return (NULL);
+	new_str[new_len] = '\0';
 	j = 0;
 	i = 0;
 	while (str[i] != '\0') {
@@ -37,7 +36,6 @@ char *remove_char(const char *str, char c)
 			new_str[j++] = str[i];
 		i++;
 	}
-	new_str[j] = '\0';
 	return (new_str);
 }
 

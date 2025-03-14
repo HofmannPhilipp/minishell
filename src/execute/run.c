@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:49:13 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 14:29:43 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:22:52 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	run_cmds(t_cmd *cmd, char ***envp)
 	else if (cmd->type == BACK)
 		run_back((t_back_cmd *)cmd, *envp);
 	gc_free_all();
+	ecl_free_all();
 	setup_signals(1);
 	exit(*exit_status);
 }

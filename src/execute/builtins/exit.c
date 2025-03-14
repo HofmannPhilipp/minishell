@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 10:58:00 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/13 13:46:48 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/14 16:20:25 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,19 @@ void	exec_exit(t_exec_cmd *cmd)
 	
 	ft_printf("exit\n");
 	if (cmd->cmd_args[1] == NULL)
+	{
+		ecl_free_all();
+		gc_free_all();
 		exit(EXIT_SUCCESS);
+	}
 	code = ft_atoi2(cmd->cmd_args[1]);
 	if (cmd->cmd_args[2] != NULL)
 	{
 		ft_putstr_fd("too many arguments\n", STDERR_FILENO);
 		code = 1;
 	}
+	ecl_free_all();
+	gc_free_all();
 	exit(code);
 }
 
