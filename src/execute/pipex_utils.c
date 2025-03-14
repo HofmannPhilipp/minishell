@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:36:15 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/12 14:40:51 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:15:45 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ char	*get_envp(char *key, char *envp[])
 	i = 0;
 	while (envp[i] != NULL)
 	{
-		sub = ft_substr(envp[i], 0, len);
+		sub = ft_substr_gc(envp[i], 0, len);
 		if (!sub)
 			return (NULL);
 		if (ft_strncmp(key, sub, len) == 0)
 		{
-			free(sub);
+			gc_free_one(sub);
 			return (envp[i] + len + 1);
 		}
-		free(sub);
+		gc_free_one(sub);
 		i++;
 	}
 	return (NULL);

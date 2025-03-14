@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:39:35 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/12 13:35:41 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/13 15:16:23 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	del_env_var(char ***envp, char *key)
 	len = 0;
 	while ((*envp)[len] != NULL)
 		len++;
-	new_envp = (char **)gc_alloc(sizeof(char *) * len);
-	new_envp[len] = NULL;
+	new_envp = (char **)ecl_alloc(sizeof(char *) * len);
+	new_envp[len - 1] = NULL;
 	i = 0;
 	j = 0;
 	while ((*envp)[i] != NULL)
@@ -39,7 +39,7 @@ static void	del_env_var(char ***envp, char *key)
 		i++;
 		j++;
 	}
-	free(*envp);
+	// free(*envp);
 	*envp = new_envp;
 }
 

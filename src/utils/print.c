@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 14:55:46 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/10 13:45:25 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:14:28 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	print_export(char **env)
 	
 	while (env[i] != NULL)
 	{
-		copy = ft_strdup(env[i]);
+		copy = ft_strdup_gc(env[i]);
 		value = ft_strchr(copy, '=');
 		if (value)
 		{
@@ -54,7 +54,7 @@ void	print_export(char **env)
 		}
 		else
 			ft_printf("declare -x %s\n", copy);
-		free(copy);
+		gc_free_one(copy);
 		i++;
 	}
 }
