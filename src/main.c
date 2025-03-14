@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:05:48 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 10:58:16 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/14 15:01:22 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void check_check()
-{
-    system("leaks minishell");
-}
 
 char	*read_prompt()
 {
@@ -40,37 +35,32 @@ int main(int argc, char *argv[], char *envp[])
 	char	*input;
 	t_list	*list;
 	t_cmd	*cmd;
+	int		*exit_status;
 	
 	(void)argc;
 	(void)argv;
 	envp = copy_env(envp);
 	setup_signals(1);
+	exit_status = get_exit_status();
 	while (1)
 	{
-		// input = "echo <missing <\"./minishell_tester/test_files/infile\" <missing";
 		input = read_prompt();
 		if (!input)
 		{
 			ft_printf("exit\n");
 			ecl_free_all();
-			//ERROR CODE AENDERN VLLT 131!!!!!!!!
-			exit(EXIT_SUCCESS);
+			exit(*exit_status);
 		}
 		list = tokenizer(input); 
 		if (list)
 		{
-			// ft_lstiter(list, print_tokens);
 			cmd = parse_cmd(&list); 
-			// print_ast(cmd, 0);
 			setup_signals(0);
 			run(cmd, &envp);
 		}
 		setup_signals(1);
-		// gc_print_list();
 		gc_free_all();
-		// gc_print_list();
-		// free(input);
-		// check_check();
+		free(input);
 	}
 	rl_clear_history();
 	return (EXIT_SUCCESS);
