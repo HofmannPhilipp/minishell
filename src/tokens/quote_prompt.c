@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   quote_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:35:24 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 15:32:13 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/14 14:17:59 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char *remove_char(const char *str, char c)
+{
+	int		new_len;
+	int		i;
+	int		j;
+	char	*new_str;
+	
+	i = 0;
+	new_len = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != c)
+			new_len++;
+		i++;
+	}
+	new_str = gc_alloc(sizeof(char) * (new_len + 1));
+	if (!new_str)
+		return (NULL);
+	j = 0;
+	i = 0;
+	while (str[i] != '\0') {
+		if (str[i] != c)
+			new_str[j++] = str[i];
+		i++;
+	}
+	new_str[j] = '\0';
+	return (new_str);
+}
 
 static int	found_closing_quote(char *str, char qoute_type)
 {
@@ -35,7 +64,7 @@ char	*open_quote_prompt(char *prompt, char qoute_type)
 	char	*result;
 	char	*temp;
 	char	*input;
-	
+
 	result = ft_strdup(prompt);
 	while (1)
 	{
@@ -45,12 +74,15 @@ char	*open_quote_prompt(char *prompt, char qoute_type)
 			input = readline("qoute> ");
 		temp = ft_strjoin("\n", input);
 		free(input);
-		input = ft_strjoin_gc(result, temp);
+		input = ft_strjoin(result, temp);
 		free(temp);
 		free(result);
 		result = input;
 		if (found_closing_quote(result, qoute_type) == 1)
 			break;
 	}
+	temp = result;
+	result = remove_char(result, qoute_type);
+	free(temp);
 	return (result);
 }
