@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:10:07 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 16:15:08 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:38:45 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,6 @@ static	char	*parse_qoutes(char **prompt, char quote_type, char **envp)
 		token_len++;
 		(*prompt)++;
 	}
-	if (token_len == 0)
-	{
-		(*prompt)++;
-		return (ft_strdup_gc(""));
-	}
 	result = ft_substr_gc(*prompt - token_len, 0, token_len);
 	if (**prompt != quote_type)
 	{
@@ -79,7 +74,6 @@ static t_list *parse_text(char **prompt, char **envp)
 				quote = ft_strjoin_gc(quote, result);
 			}
 			temp = parse_qoutes(prompt, **prompt, envp);
-
 			quote = ft_strjoin_gc(quote, temp);
 			token_len = 0;
 			continue;

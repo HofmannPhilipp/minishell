@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 16:16:31 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/12 16:15:32 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:37:46 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	exec_cd(t_exec_cmd *cmd)
 		if (!new_pwd)
 			return ;
 		*new_pwd = '\0';
-		ret = chdir(pwd);
+		if (ft_strlen(pwd) == 0)
+			ret = chdir("/");
+		else
+			ret = chdir(pwd);
 		free(pwd);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:05:48 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 16:14:02 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:08:55 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,34 @@ int	*get_exit_status(void)
 {
 	static int	exit_status = 0;
 	return (&exit_status);
+}
+
+void	ft_list_remove_if(t_list **begin_list)
+{
+	t_list	*remove;
+	t_list	*current;
+	t_token *token;
+
+	current = *begin_list;
+	while (current && current->next)
+	{
+		token = (t_token *) current->next->content;
+		if (ft_strlen(token->value) == 0)
+		{
+			remove = current->next;
+			current->next = current->next->next;
+			gc_free_one(remove);
+		}
+		current = current->next;
+	}
+	current = *begin_list;
+	token = (t_token *) current->content;
+
+	if (current && ft_strlen(token->value) == 0)
+	{
+		*begin_list = current->next;
+		gc_free_one(current);
+	}
 }
 
 int main(int argc, char *argv[], char *envp[])
@@ -54,7 +82,10 @@ int main(int argc, char *argv[], char *envp[])
 		list = tokenizer(input, envp);
 		if (list)
 		{
-			cmd = parse_cmd(&list); 
+			// ft_lstiter(list, print_tokens);
+			ft_list_remove_if(&list);
+			cmd = parse_cmd(&list);
+			// print_ast(cmd, 0);
 			setup_signals(0);
 			run(cmd, &envp);
 		}
