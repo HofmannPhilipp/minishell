@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:23:23 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/13 14:07:25 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:40:01 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,21 @@
 
 static void parent_handler(int sig)
 {
+	int *exit_status;
+	
+	exit_status = get_exit_status();
 	if (sig == SIGINT)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		*exit_status = 1;
 	}
 	else if (sig == SIGQUIT)
 	{
 		(void)sig;
+		*exit_status = 0;
 	}
 	return ;
 }
@@ -33,15 +38,16 @@ static void child_handler(int sig)
 	int *exit_status;
 	
 	exit_status = get_exit_status();
-	write(1, "c", 1);
+	// write(1, "c", 1);
 	if (sig == SIGINT)
 	{
 		(void)sig;
+		write(1, "\n", 1);
 		*exit_status = 130;
 	}
 	else if (sig == SIGQUIT)
 	{
-		(void)sig;
+		ft_putstr_fd("Quit: 3\n", 1);
 		*exit_status = 131;
 	}
 	return ;

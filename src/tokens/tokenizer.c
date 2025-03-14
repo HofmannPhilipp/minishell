@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:10:07 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 14:23:13 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:27:30 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,11 +130,10 @@ static t_list *parse_heredoc(char **prompt) //done
 	}
 		delimeter = ft_substr_gc(*prompt - token_len, 0, token_len);
 		result = open_heredoc_prompt(delimeter);
-		// free(delimeter);
 	return(ft_lstnew_gc(token_init_gc(HERE_DOC, result)));
 }
 
-t_list	*tokenizer(char *prompt) //done
+t_list	*tokenizer(char *prompt)
 {
 	t_list	*tokens;
 	t_list	*node;
@@ -148,11 +147,11 @@ t_list	*tokenizer(char *prompt) //done
 		if (*prompt == '\0')
 			break;
 		if (is_symbol(prompt, 0) == '#')
-			node = parse_heredoc(&prompt); //done
+			node = parse_heredoc(&prompt);
 		else if (is_symbol(prompt, 0) == 'a')
-			node = parse_text(&prompt); //done
+			node = parse_text(&prompt);
 		else
-			node = parse_operator(&prompt); 
+			node = parse_operator(&prompt);
 		ft_lstadd_back(&tokens, node); 
 	}
 	return (tokens);

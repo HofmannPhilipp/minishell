@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:35:24 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 14:17:59 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:29:11 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,25 @@ char	*open_quote_prompt(char *prompt, char qoute_type)
 	char	*result;
 	char	*temp;
 	char	*input;
-
-	result = ft_strdup(prompt);
+	
+	result = ft_strdup_gc(prompt);
 	while (1)
 	{
 		if (qoute_type == '"')
 			input = readline("dquote> ");
 		else
 			input = readline("qoute> ");
-		temp = ft_strjoin("\n", input);
+		temp = ft_strjoin_gc("\n", input);
 		free(input);
-		input = ft_strjoin(result, temp);
-		free(temp);
-		free(result);
+		input = ft_strjoin_gc(result, temp);
+		gc_free_one(temp);
+		gc_free_one(result);
 		result = input;
 		if (found_closing_quote(result, qoute_type) == 1)
 			break;
 	}
 	temp = result;
 	result = remove_char(result, qoute_type);
-	free(temp);
+	gc_free_one(temp);
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:05:25 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/13 10:29:19 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/13 15:26:05 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,24 @@ void *ecl_alloc(int size)
 {
     void *ptr;
     t_gc_node *node;
-    t_ecl_manager *ecl;
+	t_ecl_manager *ecl;
     
     ecl = get_ecl_instance();
 	ptr = malloc(size);
     if (!ptr)
 	{
-        perror("malloc failed");
-        exit(EXIT_FAILURE);
+		gc_free_all();
+		ecl_free_all();
+        panic("malloc failed");
+        
     }
 	node = malloc(sizeof(t_gc_node));
     if (!node)
 	{
-        perror("malloc failed");
         free(ptr);	
-        exit(EXIT_FAILURE);
+		gc_free_all();
+		ecl_free_all();
+        panic("malloc failed");        
     }
     node->ptr = ptr;
     node->next = ecl->head;

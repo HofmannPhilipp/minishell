@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 08:58:01 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 16:00:53 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/14 12:11:29 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ char	*open_heredoc_prompt(char *delimeter)
 	while(1)
 	{
 		input = readline("heredoc> ");
+		if (!input)
+			break;
 		if (found_delimeter(input, delimeter) == 1)
 		{
 			break;

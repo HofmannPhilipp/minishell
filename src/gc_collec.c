@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_collec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 11:05:17 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/13 11:13:59 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:30:23 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,17 @@ void *gc_alloc(int size)
 	ptr = malloc(size);
     if (!ptr)
 	{
-        perror("malloc failed");
-        exit(EXIT_FAILURE);
+		gc_free_all();
+		ecl_free_all();
+        panic("malloc failed");
     }
 	node = malloc(sizeof(t_gc_node));
     if (!node)
 	{
-        perror("malloc failed");
         free(ptr);	
-        exit(EXIT_FAILURE);
+		gc_free_all();
+		ecl_free_all();
+        panic("malloc failed");
     }
     node->ptr = ptr;
     node->next = gc->head;

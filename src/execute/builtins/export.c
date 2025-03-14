@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 10:40:51 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/12 16:14:52 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:18:32 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	add_env_var(char ***envp, char *entry)
 	
 	exit_status = get_exit_status();
 	key = ft_strdup_gc(entry);
-	entry = ft_strdup(entry);
+	entry = ft_strdup_ecl(entry);
 	value = ft_strchr(key, '=');
 	if (value)
 		*value = '\0';
@@ -77,7 +77,7 @@ void	add_env_var(char ***envp, char *entry)
 	i = 0;
 	while ((*envp)[i] != NULL)
 		i++;
-	new_envp = (char **)malloc(sizeof(char *) * (i + 2));
+	new_envp = (char **)ecl_alloc(sizeof(char *) * (i + 2));
 	i = 0;
 	while ((*envp)[i] != NULL)
 	{
@@ -86,7 +86,7 @@ void	add_env_var(char ***envp, char *entry)
 	}
 	new_envp[i] = entry;
 	new_envp[i + 1] = NULL;
-	free(*envp);
+	// free(*envp);
 	*envp = new_envp;
 }
 
