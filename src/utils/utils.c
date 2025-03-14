@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:37 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/13 11:13:47 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:09:45 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ char	*ft_char_to_str(char c)
 	return (str);
 }
 
-char	*get_env_var(char *env_var)
+char	*get_env_var(char *key, char **envp)
 {
 	char	*value;
 
-	value = getenv(env_var);
+	value = get_envp(key, envp);
 	if (!value)
 		value = ft_strdup_gc("");
 	else

@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:05:48 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 15:01:22 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:14:02 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int main(int argc, char *argv[], char *envp[])
 			ecl_free_all();
 			exit(*exit_status);
 		}
-		list = tokenizer(input); 
+		list = tokenizer(input, envp);
 		if (list)
 		{
 			cmd = parse_cmd(&list); 

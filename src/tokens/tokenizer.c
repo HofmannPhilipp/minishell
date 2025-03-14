@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:10:07 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 14:27:30 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:15:08 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	skip_whitespace(char **prompt)
 			(*prompt) ++;
 }
 
-static	char	*parse_qoutes(char **prompt, char quote_type)
+static	char	*parse_qoutes(char **prompt, char quote_type, char **envp)
 {
 	int		token_len;
 	char	*result;
@@ -51,13 +51,16 @@ static	char	*parse_qoutes(char **prompt, char quote_type)
 	}
 	result = ft_substr_gc(*prompt - token_len, 0, token_len);
 	if (**prompt != quote_type)
+	{
 		result = open_quote_prompt(result, quote_type);
+		return (result);
+	}
 	if (quote_type == '"')
-		result = expand_str(result);
+		result = expand_str(result , envp);
 	(*prompt)++;
 	return (result);
 }
-static t_list *parse_text(char **prompt)
+static t_list *parse_text(char **prompt, char **envp)
 {
 	int		token_len;
 	char	*result;
@@ -75,7 +78,7 @@ static t_list *parse_text(char **prompt)
 				result = ft_substr_gc(*prompt - token_len, 0, token_len);
 				quote = ft_strjoin_gc(quote, result);
 			}
-			temp = parse_qoutes(prompt, **prompt);
+			temp = parse_qoutes(prompt, **prompt, envp);
 
 			quote = ft_strjoin_gc(quote, temp);
 			token_len = 0;
@@ -86,9 +89,8 @@ static t_list *parse_text(char **prompt)
 		(*prompt)++;
 		token_len++;
 	}
-
 	result = ft_substr_gc(*prompt - token_len, 0, token_len);
-	result = expand_str(result);
+	result = expand_str(result, envp);
 	if (quote != NULL)
 		result = ft_strjoin_gc(quote, result);
 	return (ft_lstnew_gc(token_init_gc(TEXT, result)));
@@ -133,7 +135,7 @@ static t_list *parse_heredoc(char **prompt) //done
 	return(ft_lstnew_gc(token_init_gc(HERE_DOC, result)));
 }
 
-t_list	*tokenizer(char *prompt)
+t_list	*tokenizer(char *prompt, char **envp)
 {
 	t_list	*tokens;
 	t_list	*node;
@@ -149,7 +151,7 @@ t_list	*tokenizer(char *prompt)
 		if (is_symbol(prompt, 0) == '#')
 			node = parse_heredoc(&prompt);
 		else if (is_symbol(prompt, 0) == 'a')
-			node = parse_text(&prompt);
+			node = parse_text(&prompt, envp);
 		else
 			node = parse_operator(&prompt);
 		ft_lstadd_back(&tokens, node); 

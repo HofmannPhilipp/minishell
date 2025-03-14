@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
+/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:43:47 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/13 16:28:55 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/14 16:12:23 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*extract_env_name(char *str, int *i)
 		panic("malloc fail");
 	return (env_name);
 }
-static char	*replace_env_variable(char *str, int *i, char *result)
+static char	*replace_env_variable(char *str, int *i, char *result, char **envp)
 {
 	char	*temp;
 	char	*env_name;
@@ -48,14 +48,9 @@ static char	*replace_env_variable(char *str, int *i, char *result)
 		env_value = ft_itoa_gc(*exit_status);
 	}
 	else
-		env_value = get_env_var(env_name);
-	// free(env_name);
+		env_value = get_env_var(env_name, envp);
 	temp = result;
 	result = ft_strjoin_gc(temp, env_value);
-	// free(env_value);
-	// free(temp);
-	// if (!result)
-	// 	panic("malloc fail");
 	return (result);
 }
 
@@ -79,7 +74,7 @@ static char	*append_normal_text(char *str, int *i, char *result)
 	return (result);
 }
 
-char	*expand_str(char *str)
+char	*expand_str(char *str, char **envp)
 {
 	char	*result;
 	int		i;
@@ -92,7 +87,7 @@ char	*expand_str(char *str)
 	while (str[i])
 	{
 		if (str[i] == '$')
-			result = replace_env_variable(str, &i, result);
+			result = replace_env_variable(str, &i, result, envp);
 		else
 			result = append_normal_text(str, &i, result);
 	}

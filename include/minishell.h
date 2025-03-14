@@ -6,7 +6,7 @@
 /*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 13:06:36 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/12 16:15:54 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/14 16:14:29 by phhofman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	exec_exit(t_exec_cmd *cmd);
 void	add_env_var(char ***envp, char *value);
 
 // utils
-char	*get_env_var(char *env_var);
+char	*get_env_var(char *key, char **envp);
 char	**ft_split2(char const *s, char *delimiters);
 void	panic(char *error_msg);
 int		fork_plus();
@@ -87,9 +87,9 @@ t_cmd	*seq_cmd_init(t_cmd *left, t_cmd *right);
 t_cmd	*back_cmd_init(t_cmd *left);
 
 // tokens
-char	*expand_str(char *str);
+char	*expand_str(char *str, char **envp);
 t_token	*token_init(int type, char *value);
-t_list	*tokenizer(char *buf);
+t_list	*tokenizer(char *prompt, char **envp);
 int		get_token_type(char c);
 char	*open_quote_prompt(char *input, char qoute_type);
 char	*open_heredoc_prompt(char *delimeter);
