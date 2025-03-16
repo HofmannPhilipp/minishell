@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:52:06 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/16 13:03:14 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/16 15:41:42 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ void	run_exec(t_exec_cmd	*exec, char *envp[])
 		handle_error("command not found\n", 127);
 	}
 	execve(cmd_path, exec->cmd_args, envp);
-	panic("fail execve exec");
+	panic("fail execve exec\n");
 }

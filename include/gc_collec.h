@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 14:30:23 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/16 15:04:56 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/16 15:43:37 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char					*ft_itoa_gc(int n);
 t_ecl_manager			*get_ecl_instance(void);
 void					*ecl_alloc(int size);
 void					ecl_free_all(void);
+void					ecl_free_one(void *ptr);
 
 //Exit Cleanup List Functions
 char					*ft_strdup_ecl(const char *s1);

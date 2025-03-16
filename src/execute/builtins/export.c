@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 10:40:51 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/16 13:00:41 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/16 15:44:13 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	replace_env_entry(char ***envp, char *key, char *entry)
 	{
 		if (ft_strncmp((*envp)[i], key, ft_strlen(key)) == 0)
 		{
-			free((*envp)[i]);
+			ecl_free_one((*envp)[i]);
 			(*envp)[i] = entry;
 			return ;
 		}
