@@ -7,12 +7,12 @@ SRC_DIR = ./src
 VPATH = $(SRC_DIR) $(SRC_DIR)/execute $(SRC_DIR)/tokens $(SRC_DIR)/utils $(SRC_DIR)/parse $(SRC_DIR)/execute/builtins
 
 SRCS =	main.c \
-		run.c exec.c pipex_utils.c \
+		run.c run_pipe.c run_redir.c exec.c env.c \
 		parse_cmd.c parse_block.c parse_line.c parse_exec.c parse_pipe.c parse_redir.c \
-		cmd_init.c print_ast.c \
-		tokenizer.c token_init.c expand.c quote_prompt.c heredoc_prompt.c \
-		utils.c ft_split2.c free.c print.c\
-		signals.c gc_functions.c gc_collec.c exit_cleanup_list.c ecl_functions.c \
+		cmd_init.c cmd_init_extras.c print_ast.c \
+		tokenizer.c parse_tokens.c token_init.c expand.c quote_prompt.c heredoc_prompt.c \
+		utils.c error.c ft_split2.c free.c print.c list_remove.c\
+		signals.c gc_functions.c gc_itoa.c gc_split.c gc_collec.c exit_cleanup_list.c ecl_functions.c exit_status.c \
 		builtins.c export.c echo.c unset.c cd.c exit.c pwd.c
 
 OBJS_DIR = objects

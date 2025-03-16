@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:51:28 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/12 16:15:43 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:46:44 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	run_builtins(t_exec_cmd *cmd, char ***envp) //done
 {
-	char *builtin;
-	int	len;
+	char	*builtin;
+	int		len;
 
 	builtin = cmd->cmd_args[0];
 	len = ft_strlen(builtin);
@@ -51,8 +51,3 @@ int	is_builtin(char *cmd)
 		return (1);
 	return (0);
 }
-
-
-
-
-

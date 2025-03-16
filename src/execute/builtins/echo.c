@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:15:13 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/11 12:14:38 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:51:06 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	exec_echo(t_exec_cmd *cmd)
 {
@@ -22,7 +21,8 @@ void	exec_echo(t_exec_cmd *cmd)
 	args = cmd->cmd_args;
 	i = 1;
 	flag = 0;
-	while (args[i] && args[i][0] == '-' && args[i][1] == 'n' && args[i][2] == '\0')
+	while (args[i] && args[i][0] == '-' && args[i][1] == 'n'
+		&& args[i][2] == '\0')
 	{
 		flag = 1;
 		i++;

@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_cmd.c                                        :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 09:44:44 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/16 13:25:14 by cwolf            ###   ########.fr       */
+/*   Created: 2025/03/16 14:46:28 by cwolf             #+#    #+#             */
+/*   Updated: 2025/03/16 14:46:55 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd	*parse_cmd(t_list **list)
+void	panic(char *error_msg)
 {
-	t_cmd	*cmd;
+	if (error_msg)
+		ft_printf("%s", error_msg);
+	exit(EXIT_FAILURE);
+}
 
-	cmd = parse_line(list);
-	if (*list != NULL)
-		panic("syntax error, leftovers in prompt");
-	return (cmd);
+void	handle_error(char *msg, int exit_code)
+{
+	int	*exit_status;
+
+	exit_status = get_exit_status();
+	*exit_status = exit_code;
+	if (msg)
+		ft_putstr_fd(msg, STDERR_FILENO);
+	exit(exit_code);
 }

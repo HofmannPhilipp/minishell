@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:43:47 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 16:12:23 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/16 13:54:43 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,24 @@ static char	*extract_env_name(char *str, int *i)
 		panic("malloc fail");
 	return (env_name);
 }
+
 static char	*replace_env_variable(char *str, int *i, char *result, char **envp)
 {
 	char	*temp;
 	char	*env_name;
 	char	*env_value;
 	int		*exit_status;
-	
+
 	if (ft_strchr("\t\n\v\f\r ", str[*i + 1]) || str[*i + 1] == '\0')
 	{
 		temp = result;
 		result = ft_strjoin_gc(temp, "$");
-		// free(temp);
 		(*i)++;
 		return (result);
 	}
 	(*i)++;
 	env_name = extract_env_name(str, i);
-	if(ft_strncmp(env_name, "?", ft_strlen("?")) == 0)
+	if (ft_strncmp(env_name, "?", ft_strlen("?")) == 0)
 	{
 		exit_status = get_exit_status();
 		env_value = ft_itoa_gc(*exit_status);
@@ -65,12 +65,10 @@ static char	*append_normal_text(char *str, int *i, char *result)
 		(*i)++;
 	text_part = ft_substr_gc(str, start, *i - start);
 	if (!text_part)
-		panic ("malloc fail");
+		panic("malloc fail");
 	temp = result;
 	result = ft_strjoin_gc(temp, text_part);
 	gc_free_one(text_part);
-	// if (!result)
-	// 	panic("malloc fail");
 	return (result);
 }
 
@@ -82,7 +80,6 @@ char	*expand_str(char *str, char **envp)
 	result = ft_strdup_gc("");
 	if (!result)
 		panic("malloc fail");
-
 	i = 0;
 	while (str[i])
 	{
@@ -93,4 +90,3 @@ char	*expand_str(char *str, char **envp)
 	}
 	return (result);
 }
-

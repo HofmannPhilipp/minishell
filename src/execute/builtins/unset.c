@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:39:35 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/13 15:16:23 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/16 13:03:04 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	del_env_var(char ***envp, char *key)
 	int		i;
 	int		len;
 	int		j;
-	
+
 	if (get_envp(key, *envp) == NULL)
 		return ;
 	len = 0;
@@ -33,13 +33,10 @@ static void	del_env_var(char ***envp, char *key)
 		if (ft_strncmp((*envp)[i], key, ft_strlen(key)) == 0)
 		{
 			i++;
-			continue;
+			continue ;
 		}
-		new_envp[j] = (*envp)[i];
-		i++;
-		j++;
+		new_envp[j++] = (*envp)[i++];
 	}
-	// free(*envp);
 	*envp = new_envp;
 }
 
@@ -48,7 +45,6 @@ void	exec_unset(t_exec_cmd *cmd, char ***envp)
 	int	i;
 
 	i = 1;
-	
 	while (cmd->cmd_args[i] != NULL)
 	{
 		del_env_var(envp, cmd->cmd_args[i]);

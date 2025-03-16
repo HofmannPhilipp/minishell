@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:52:06 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 18:05:23 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/16 13:03:14 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	run_exec(t_exec_cmd	*exec, char *envp[])
 {
 	char	*cmd_path;
-	
+
 	setup_signals(0);
 	if (!exec->cmd_args[0])
 		panic("no cmd args\n");
@@ -31,4 +31,3 @@ void	run_exec(t_exec_cmd	*exec, char *envp[])
 	execve(cmd_path, exec->cmd_args, envp);
 	panic("fail execve exec");
 }
-

@@ -6,13 +6,13 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 09:50:17 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/05 14:42:54 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/16 13:25:10 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd	*parse_block(t_list **list) //done
+t_cmd	*parse_block(t_list **list)
 {
 	t_cmd	*cmd;
 	t_token	*token;

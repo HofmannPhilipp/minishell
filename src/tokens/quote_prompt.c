@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   quote_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:35:24 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 16:23:33 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/16 13:56:53 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *remove_char(const char *str, char c)
+char	*remove_char(const char *str, char c)
 {
 	int		new_len;
 	int		i;
 	int		j;
 	char	*new_str;
-	
+
 	i = 0;
 	new_len = 0;
 	while (str[i] != '\0')
@@ -31,7 +31,8 @@ char *remove_char(const char *str, char c)
 	new_str[new_len] = '\0';
 	j = 0;
 	i = 0;
-	while (str[i] != '\0') {
+	while (str[i] != '\0')
+	{
 		if (str[i] != c)
 			new_str[j++] = str[i];
 		i++;
@@ -43,13 +44,13 @@ static int	found_closing_quote(char *str, char qoute_type)
 {
 	int	i;
 	int	qoute_count;
-	
+
 	i = 0;
 	qoute_count = 1;
 	while (str[i])
 	{
 		if (str[i] == qoute_type)
-			qoute_count ++;
+			qoute_count++;
 		i++;
 	}
 	if (qoute_count % 2 == 0)
@@ -62,7 +63,7 @@ char	*open_quote_prompt(char *prompt, char qoute_type)
 	char	*result;
 	char	*temp;
 	char	*input;
-	
+
 	result = ft_strdup_gc(prompt);
 	while (1)
 	{
@@ -77,7 +78,7 @@ char	*open_quote_prompt(char *prompt, char qoute_type)
 		gc_free_one(result);
 		result = input;
 		if (found_closing_quote(result, qoute_type) == 1)
-			break;
+			break ;
 	}
 	temp = result;
 	result = remove_char(result, qoute_type);

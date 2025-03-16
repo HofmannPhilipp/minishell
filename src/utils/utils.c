@@ -3,34 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 11:00:37 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 18:07:52 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/16 14:46:49 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	panic(char *error_msg)
-{
-	if (error_msg)
-		ft_printf("%s",error_msg);
-	exit(EXIT_FAILURE);
-}
-
-void	handle_error(char	*msg, int exit_code)
-{
-	int	*exit_status;
-
-	exit_status = get_exit_status();
-	*exit_status = exit_code;
-	if (msg)
-		ft_putstr_fd(msg, STDERR_FILENO);
-	exit(exit_code);
-}
-
-int	fork_plus()
+int	fork_plus(void)
 {
 	int	pid;
 
@@ -81,7 +63,7 @@ char	**copy_env(char *envp[])
 {
 	char	**copy;
 	int		len;
-	
+
 	len = 0;
 	while (envp[len] != NULL)
 		len++;

@@ -6,16 +6,16 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:23:23 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/14 12:40:01 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/16 15:03:09 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void parent_handler(int sig)
+static void	parent_handler(int sig)
 {
-	int *exit_status;
-	
+	int	*exit_status;
+
 	exit_status = get_exit_status();
 	if (sig == SIGINT)
 	{
@@ -33,12 +33,11 @@ static void parent_handler(int sig)
 	return ;
 }
 
-static void child_handler(int sig)
+static void	child_handler(int sig)
 {
-	int *exit_status;
-	
+	int	*exit_status;
+
 	exit_status = get_exit_status();
-	// write(1, "c", 1);
 	if (sig == SIGINT)
 	{
 		(void)sig;
@@ -53,10 +52,10 @@ static void child_handler(int sig)
 	return ;
 }
 
-void setup_signals(int in_child)
+void	setup_signals(int in_child)
 {
-	struct sigaction sa;
-	
+	struct sigaction	sa;
+
 	sigemptyset(&sa.sa_mask);
 	if (in_child)
 		sa.sa_handler = &parent_handler;

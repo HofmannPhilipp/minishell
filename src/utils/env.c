@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:36:15 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 12:15:45 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/16 13:03:32 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_envp(char *key, char *envp[])
 	return (NULL);
 }
 
-char	*get_cmd_path(char *cmd, char *envp[]) //done
+char	*get_cmd_path(char *cmd, char *envp[])
 {
 	char	**paths;
 	char	*path;

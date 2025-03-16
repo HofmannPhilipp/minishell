@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 10:40:51 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 12:18:32 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/16 13:00:41 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 int	is_valid_identifier(const char *str)
 {
-	int i;
+	int	i;
 
 	if (!str || str[0] == '\0')
 		return (0);
-	
 	if (!ft_isalpha(str[0]) && str[0] != '_')
 		return (0);
-	
 	i = 1;
-	while(str[i] != '\0')
+	while (str[i] != '\0')
 	{
 		if (!ft_isalnum(str[i]) && str[i] != '_')
 			return (0);
@@ -37,7 +35,7 @@ void	replace_env_entry(char ***envp, char *key, char *entry)
 	int	i;
 
 	i = 0;
-	while((*envp)[i] != NULL)
+	while ((*envp)[i] != NULL)
 	{
 		if (ft_strncmp((*envp)[i], key, ft_strlen(key)) == 0)
 		{
@@ -49,14 +47,32 @@ void	replace_env_entry(char ***envp, char *key, char *entry)
 	}
 }
 
-void	add_env_var(char ***envp, char *entry)
+static char	**expand_envp(char **envp, char *entry)
 {
 	char	**new_envp;
-	char	*value;
 	int		i;
+
+	i = 0;
+	while (envp[i] != NULL)
+		i++;
+	new_envp = (char **)ecl_alloc(sizeof(char *) * (i + 2));
+	i = 0;
+	while (envp[i] != NULL)
+	{
+		new_envp[i] = envp[i];
+		i++;
+	}
+	new_envp[i] = entry;
+	new_envp[i + 1] = NULL;
+	return (new_envp);
+}
+
+void	add_env_var(char ***envp, char *entry)
+{
+	char	*value;
 	char	*key;
 	int		*exit_status;
-	
+
 	exit_status = get_exit_status();
 	key = ft_strdup_gc(entry);
 	entry = ft_strdup_ecl(entry);
@@ -74,20 +90,7 @@ void	add_env_var(char ***envp, char *entry)
 		replace_env_entry(envp, key, entry);
 		return ;
 	}
-	i = 0;
-	while ((*envp)[i] != NULL)
-		i++;
-	new_envp = (char **)ecl_alloc(sizeof(char *) * (i + 2));
-	i = 0;
-	while ((*envp)[i] != NULL)
-	{
-		new_envp[i] = (*envp)[i];
-		i++;
-	}
-	new_envp[i] = entry;
-	new_envp[i + 1] = NULL;
-	// free(*envp);
-	*envp = new_envp;
+	*envp = expand_envp(*envp, entry);
 }
 
 void	exec_export(t_exec_cmd *cmd, char ***envp)

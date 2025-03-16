@@ -6,63 +6,61 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:05:25 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/13 15:26:05 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/16 14:48:50 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_ecl_manager* get_ecl_instance()
+t_ecl_manager	*get_ecl_instance(void)
 {
-    static t_ecl_manager ecl = {NULL};
-    return (&ecl);
+	static t_ecl_manager	ecl = {NULL};
+
+	return (&ecl);
 }
 
-void *ecl_alloc(int size)
+void	*ecl_alloc(int size)
 {
-    void *ptr;
-    t_gc_node *node;
-	t_ecl_manager *ecl;
-    
-    ecl = get_ecl_instance();
+	void			*ptr;
+	t_gc_node		*node;
+	t_ecl_manager	*ecl;
+
+	ecl = get_ecl_instance();
 	ptr = malloc(size);
-    if (!ptr)
+	if (!ptr)
 	{
 		gc_free_all();
 		ecl_free_all();
-        panic("malloc failed");
-        
-    }
+		panic("malloc failed");
+	}
 	node = malloc(sizeof(t_gc_node));
-    if (!node)
+	if (!node)
 	{
-        free(ptr);	
+		free(ptr);
 		gc_free_all();
 		ecl_free_all();
-        panic("malloc failed");        
-    }
-    node->ptr = ptr;
-    node->next = ecl->head;
-    ecl->head = node;
-
-    return (ptr);
+		panic("malloc failed");
+	}
+	node->ptr = ptr;
+	node->next = ecl->head;
+	ecl->head = node;
+	return (ptr);
 }
 
-void ecl_free_all(void) 
+void	ecl_free_all(void)
 {
-    t_gc_node *node;
-	t_gc_node *next;
-    t_ecl_manager    *ecl;
+	t_gc_node		*node;
+	t_gc_node		*next;
+	t_ecl_manager	*ecl;
 
-    ecl = get_ecl_instance();
+	ecl = get_ecl_instance();
 	node = ecl->head;
-    // ft_printf("FREE_ALL FUNCTION .........\n");
-    while (node) 
+	while (node)
 	{
-        next = node->next;
-        free(node->ptr);
-        free(node);
-        node = next;
-    }
-    ecl->head = NULL;
+		next = node->next;
+		free(node->ptr);
+		free(node);
+		node = next;
+	}
+	ecl->head = NULL;
 }

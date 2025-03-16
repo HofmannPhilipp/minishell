@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phhofman <phhofman@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 10:58:00 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/14 16:20:25 by phhofman         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:54:39 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	ft_atoi2(const char *str);
 void	exec_exit(t_exec_cmd *cmd)
 {
 	unsigned char	code;
-	
+
 	ft_printf("exit\n");
 	if (cmd->cmd_args[1] == NULL)
 	{
