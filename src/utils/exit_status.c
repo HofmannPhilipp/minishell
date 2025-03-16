@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 13:07:09 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/16 13:08:12 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/16 17:44:56 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 int	*get_exit_status(void)
 {
-	static int	exit_status;
+	static int	exit_status = 0;
 
-	exit_status = 0;
 	return (&exit_status);
 }
 
