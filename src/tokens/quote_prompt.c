@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:35:24 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/16 13:56:53 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/16 17:10:35 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,21 @@ static int	found_closing_quote(char *str, char qoute_type)
 	return (0);
 }
 
+static char	*join_input_with_newline(char *result, char *input)
+{
+	char	*temp;
+
+	temp = ft_strjoin_gc("\n", input);
+	free(input);
+	input = ft_strjoin_gc(result, temp);
+	gc_free_one(temp);
+	gc_free_one(result);
+	return (input);
+}
+
 char	*open_quote_prompt(char *prompt, char qoute_type)
 {
 	char	*result;
-	char	*temp;
 	char	*input;
 
 	result = ft_strdup_gc(prompt);
@@ -71,17 +82,18 @@ char	*open_quote_prompt(char *prompt, char qoute_type)
 			input = readline("dquote> ");
 		else
 			input = readline("qoute> ");
-		temp = ft_strjoin_gc("\n", input);
-		free(input);
-		input = ft_strjoin_gc(result, temp);
-		gc_free_one(temp);
-		gc_free_one(result);
+		if (!input)
+		{
+			ft_printf("syntax error: unexpected EOF\n");
+			ecl_free_all();
+			gc_free_all();
+			exit(258);
+		}
+		input = join_input_with_newline(result, input);
 		result = input;
 		if (found_closing_quote(result, qoute_type) == 1)
 			break ;
 	}
-	temp = result;
 	result = remove_char(result, qoute_type);
-	gc_free_one(temp);
 	return (result);
 }

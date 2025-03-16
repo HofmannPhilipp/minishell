@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:05:25 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/16 15:43:12 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/16 15:49:58 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ecl_free_all(void)
 
 void	ecl_free_one(void *ptr)
 {
-	t_gc_manager	*ecl;
+	t_ecl_manager	*ecl;
 	t_gc_node		*prev;
 	t_gc_node		*curr;
 

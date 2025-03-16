@@ -6,7 +6,7 @@
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 13:10:29 by cwolf             #+#    #+#             */
-/*   Updated: 2025/03/16 13:18:59 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/16 16:13:29 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	run_pipe(t_pipe_cmd *pipe_cmd, char *envp[])
 	int	*exit_status;
 
 	if (pipe(tunnel) < 0)
-		panic("pipe fail");
+		handle_error("pipe failed\n", 1);
 	if (fork_plus() == 0)
 	{
 		close(tunnel[0]);

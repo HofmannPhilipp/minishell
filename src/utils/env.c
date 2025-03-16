@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwolf <cwolf@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:36:15 by phhofman          #+#    #+#             */
-/*   Updated: 2025/03/16 13:03:32 by cwolf            ###   ########.fr       */
+/*   Updated: 2025/03/16 16:51:47 by cwolf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char	*get_cmd_path(char *cmd, char *envp[])
 	if (!cmd_temp)
 		return (NULL);
 	paths = get_paths(envp);
+	if (paths == NULL)
+		return (free(cmd_temp), NULL);
 	i = 0;
 	while (paths[i] != NULL)
 	{
